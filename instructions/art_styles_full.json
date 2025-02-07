@@ -1,0 +1,84 @@
+{
+    "art_styles": [
+        {
+            "name": "Baroque",
+            "characteristics": {
+                "Dramatic light contrasts (chiaroscuro)": "Baroque art often features stark contrasts between light and dark, creating a dramatic and theatrical effect that highlights the emotional intensity of the scene.",
+                "Emotional intensity": "Baroque artists aimed to evoke strong emotions in the viewer, often depicting scenes of intense drama, passion, and movement.",
+                "Dynamic compositions": "Baroque compositions are characterized by their sense of movement and energy, with swirling lines and complex arrangements that draw the viewer's eye through the artwork."
+            }
+        },
+        {
+            "name": "Renaissance",
+            "characteristics": {
+                "Symmetry, harmony, idealized human forms": "Renaissance art emphasizes balance and proportion, often depicting the human body in an idealized, harmonious way that reflects classical ideals of beauty.",
+                "Architectural details": "Renaissance artists often included detailed architectural elements in their works, drawing inspiration from classical Greek and Roman structures.",
+                "Linear perspective to create depth and spatial realism": "The use of linear perspective allowed Renaissance artists to create a sense of depth and three-dimensionality in their paintings, making the scenes appear more realistic."
+            }
+        },
+        {
+            "name": "Northern Renaissance",
+            "characteristics": {
+                "Detailed natural landscapes": "Northern Renaissance artists were known for their meticulous attention to detail, particularly in their depictions of natural landscapes and everyday life.",
+                "Moral allegory and rich symbolism": "Many Northern Renaissance works contain layers of symbolism and moral messages, often conveyed through intricate details and hidden meanings.",
+                "Used oil paints to create rich textures and vibrant colors": "The use of oil paints allowed Northern Renaissance artists to achieve a high level of detail and vibrant color in their works, enhancing the overall realism."
+            }
+        },
+        {
+            "name": "Dutch Golden Age",
+            "characteristics": {
+                "Detailed domestic scenes": "Dutch Golden Age artists often focused on scenes of everyday life, capturing the beauty and complexity of ordinary moments with great detail.",
+                "Warm natural lighting": "These artists skillfully used light to create a warm, inviting atmosphere in their paintings, often highlighting the textures and details of the scene.",
+                "Focus on everyday life": "The art of the Dutch Golden Age often celebrated the simplicity and beauty of daily life, depicting scenes of domesticity, work, and leisure."
+            }
+        },
+        {
+            "name": "Pre-Raphaelite",
+            "characteristics": {
+                "Intricate botanical details": "Pre-Raphaelite artists paid close attention to the natural world, often including detailed and accurate depictions of plants and flowers in their works.",
+                "Vibrant colors": "The use of bright, vivid colors is a hallmark of Pre-Raphaelite art, creating a sense of richness and intensity.",
+                "Emphasis on beauty and purity": "Pre-Raphaelite works often idealize beauty and purity, depicting subjects with a sense of innocence and grace."
+            }
+        },
+        {
+            "name": "Romanticism",
+            "characteristics": {
+                "Emotion-driven": "Romanticism is characterized by its focus on emotion and individual experience, often depicting scenes of intense passion, drama, and personal struggle.",
+                "Dramatic landscapes": "Romantic artists frequently painted dramatic, awe-inspiring landscapes that evoke a sense of the sublime and the power of nature.",
+                "Contrasts between light and shadow": "The use of light and shadow in Romantic art enhances the emotional impact of the scene, creating a sense of depth and drama."
+            }
+        },
+        {
+            "name": "Neoclassical",
+            "characteristics": {
+                "Clean lines": "Neoclassical art is characterized by its clear, precise lines and orderly compositions, reflecting the influence of classical Greek and Roman art.",
+                "Symmetrical composition": "Neoclassical works often feature balanced, symmetrical arrangements that convey a sense of order and harmony.",
+                "Emphasis on moral clarity and virtue": "Neoclassical artists aimed to convey moral messages and ideals of virtue, often depicting scenes from classical mythology or history."
+            }
+        },
+        {
+            "name": "Realism",
+            "characteristics": {
+                "Accurate depictions of everyday life": "Realist artists sought to portray life as it truly is, focusing on the ordinary and the mundane with a high level of detail and accuracy.",
+                "Emotional resonance": "Realist works often convey deep emotional truths, capturing the struggles, joys, and complexities of human experience.",
+                "Focus on work and relationships": "Realist art frequently depicts scenes of labor, family life, and social interactions, highlighting the importance of work and relationships in everyday life."
+            }
+        },
+        {
+            "name": "Impressionism",
+            "characteristics": {
+                "Soft brushstrokes": "Impressionist artists used loose, fluid brushstrokes to capture the fleeting effects of light and color.",
+                "Dynamic lighting": "The play of light and shadow is a key element in Impressionist works, creating a sense of movement and atmosphere.",
+                "Focus on capturing the emotional warmth and joy of communal faith": "Impressionist art often depicts scenes of everyday life with a sense of warmth and joy, celebrating the beauty of ordinary moments."
+            }
+        },
+        {
+            "name": "High Renaissance",
+            "characteristics": {
+                "Majestic compositions with idealized figures": "High Renaissance artists achieved a sense of grandeur and majesty in their works, often depicting idealized human forms.",
+                "Focus on the grandeur of divine moments": "High Renaissance art frequently explores themes of divine beauty and spiritual significance.",
+                "Unified compositions where each element contributes to the overall narrative or theme": "The careful arrangement of elements in High Renaissance works creates a cohesive and harmonious whole."
+            }
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "captions": {
+        "font": "/System/Library/Fonts/Helvetica.ttc",
+        "font_size": 130,
+        "font_color": "white",
+        "stroke_width": 3,
+        "stroke_color": "black",
+        "highlight_current_word": true,
+        "word_highlight_color": "yellow",
+        "line_count": 2,
+        "padding": 50,
+        "shadow_strength": 1.0,
+        "shadow_blur": 0.1
+    },
+    "video": {
+        "fps": 30,
+        "width": 1024,
+        "height": 1024,
+        "codec": "avc1"
+    },
+    "image": {
+        "model": "dall-e-3",
+        "size": "1024x1024",
+        "quality": "standard",
+        "n": 1
+    }
+}
