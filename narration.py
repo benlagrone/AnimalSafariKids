@@ -1,7 +1,9 @@
 # from elevenlabs import voices, generate, play, stream, save
+import time
 from gtts import gTTS
 import os
 import re
+import json
 
 # You can set this environment variable to choose the service
 # export TTS_SERVICE=gtts  # or elevenlabs
@@ -37,6 +39,24 @@ def parse(text):
             # Add to both data and narrations
             data.append({"narration": narration})
             narrations.append(narration)
+
+        elif line.startswith('Title:'):
+            # Extract the narration text
+            title = line.replace('Title:', '').strip()
+            # Remove quotes if present
+            title = title.strip('"').strip('"').strip('"')
+            # Add to both data and narrations
+            data.append({"title": title})
+            # title.append(title)
+
+        elif line.startswith('Description:'):
+            # Extract the narration text
+            description = line.replace('Description:', '').strip()
+            # Remove quotes if present
+            description = description.strip('"').strip('"').strip('"')
+            # Add to both data and narrations
+            data.append({"description": description})
+            # narrations.append(narration)
     
     return data, narrations
 
@@ -46,6 +66,7 @@ def create(data, output_dir):
         os.makedirs(output_dir)
     
     narration_count = 0
+    narration_data = []
     
     for i, item in enumerate(data):
         if "narration" not in item:
@@ -67,6 +88,19 @@ def create(data, output_dir):
                     )
                     tts.save(output_file)
                     print(f"Successfully created narration {narration_count}")
+                    
+                    # Get audio duration using AudioSegment
+                    from pydub import AudioSegment
+                    audio = AudioSegment.from_mp3(output_file)
+                    duration = len(audio)
+                    
+                    # Add to narration data
+                    narration_data.append({
+                        "filename": f"narration_{narration_count}.mp3",
+                        "duration": duration,
+                        "text":item["narration"]
+                    })
+                    
                     break
                 else:
                     # Use ElevenLabs...
@@ -77,12 +111,28 @@ def create(data, output_dir):
                     with open(output_file, 'wb') as f:
                         f.write(audio)
                     
+                    # Get audio duration using AudioSegment
+                    audio = AudioSegment.from_mp3(output_file)
+                    duration = len(audio)
+                    
+                    # Add to narration data
+                    narration_data.append({
+                        "filename": f"narration_{narration_count}.mp3",
+                        "duration": duration,
+                        "text":item["narration"]
+                    })
+                    
             except Exception as e:
                 if attempt == max_retries - 1:  # Last attempt
                     print(f"Error creating narration {narration_count}: {str(e)}")
                     raise
                 print(f"Attempt {attempt + 1} failed, retrying...")
                 time.sleep(2 ** attempt)  # Exponential backoff
+        
+    parent_dir = os.path.dirname(output_dir)
+    with open(os.path.join(parent_dir, "narration.json"), "w") as f:
+        json.dump(narration_data, f, indent=2)
+
 
 def generate_narration(text, output_file):
     """Generate a single narration file."""
