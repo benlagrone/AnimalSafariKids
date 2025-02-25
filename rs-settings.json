@@ -1,16 +1,17 @@
 {
     "branding":{
-        "logo":"animal-safari-circle.png",
-        "logo-x":5,
-        "logo-y":5
+        "logo":"logophone.png",
+        "logo-x":100,
+        "logo-y":5,
+        "logo_scale":0.07
     },
     "upload":{
         "enabled": true,
-        "youtube_channel":"UCU1T3KZjLceczyfHr2aqpeQ",
+        "youtube_channel":"UC_grGcaDW3AUszA8_MVGyJg",
         "youtube_category":15
     },
     "captions": {
-        "font": "/System/Library/Fonts/Supplemental/Chalkboard.ttc",
+        "font": "/System/Library/Fonts/Supplemental/Futura.ttc",
         "font_size": 60,
         "font_color": "white",
         "stroke_width": 3,
@@ -24,12 +25,13 @@
     },
     "script":{
         "art":[
-            "Naturalist Realism"
+            "Professional Real Estate Photography Services",
+            "Modern Real Estate Service Commercial"
         ],
         "focus":["Cinematic"],
         "min-length":"2 minute",
         "max-length":"3 minutes",
-        "scripts":["panda.txt","zebra.txt","cheetah.txt"]
+        "scripts":["rs-1.txt","rs-2.txt","rs-3.txt","rs-4.txt","rs-5.txt"]
     },
     "video": {
         "fps": 30,
@@ -39,28 +41,16 @@
         "slide_speed_multiplier":4
     },
     "image": {
-        "model": "sd_xl_base_1.0.safetensors",
-        "prompt_size":"norm",
+        "model": "dall-e-3",
         "size": "1024x1792",
-        "width":1536,
-        "height":1536,
+        "width":1024,
+        "height":1024,
         "size2": "1792x1024",
         "slide-px":10,
         "quality": "standard",
         "orientation":"portrait",
         "n": 1,
-        "effect": "Cinematic",
-        "steps": 50,
-        "cfg_scale": 6.5,
-        "sampler_index": "DPM++ SDE Karras",
-        "hr_scale": 1.0,
-        "hr_upscaler": "ESRGAN_4x",
-        "denoising_strength": 0.3,
-        "batch_size": 1,
-        "batch_count": 1,
-        "seed": -1,
-        "enable_hr": "true",
-        "refiner_checkpoint": "null",
-        "refiner_switch_at": 0.6
+        "subject":"Caucasian, European, or Asian Americans , [no Indians, or Arabs]",
+        "effect": "Cinematic"
     }
 }

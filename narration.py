@@ -11,8 +11,8 @@ TTS_SERVICE = os.getenv('TTS_SERVICE', 'gtts')  # Default to gtts if not set
 
 def parse(text):
     """Parse the input text into data and narrations."""
-    # Initialize lists to store the parsed data
-    data = []
+    # Initialize variables to store the parsed data
+    data = {"scenes": []}
     narrations = []
     
     # Split the text into lines and remove empty lines
@@ -26,9 +26,9 @@ def parse(text):
             
         # Check if this is an image description
         if line.startswith('[') and line.endswith(']'):
-            # Extract the image description and add to data
+            # Extract the image description and add to scenes
             image_desc = line[1:-1]  # Remove the brackets
-            data.append({"image": image_desc})
+            data["scenes"].append({"image": image_desc})
             
         # Check if this is narration
         elif line.startswith('Narrator:'):
@@ -36,27 +36,32 @@ def parse(text):
             narration = line.replace('Narrator:', '').strip()
             # Remove quotes if present
             narration = narration.strip('"').strip('"').strip('"')
-            # Add to both data and narrations
-            data.append({"narration": narration})
+            # Add to both scenes and narrations
+            data["scenes"].append({"narration": narration})
             narrations.append(narration)
 
         elif line.startswith('Title:'):
-            # Extract the narration text
+            # Extract the title text
             title = line.replace('Title:', '').strip()
             # Remove quotes if present
             title = title.strip('"').strip('"').strip('"')
-            # Add to both data and narrations
-            data.append({"title": title})
-            # title.append(title)
+            # Add to data
+            data["title"] = title
 
         elif line.startswith('Description:'):
-            # Extract the narration text
+            # Extract the description text
             description = line.replace('Description:', '').strip()
             # Remove quotes if present
             description = description.strip('"').strip('"').strip('"')
-            # Add to both data and narrations
-            data.append({"description": description})
-            # narrations.append(narration)
+            # Add to data
+            data["description"] = description
+
+        elif line.startswith('Tags:'):
+            # Extract the tags text
+            tags = line.replace('Tags:', '').strip()
+            tags_array = json.loads(tags)
+            # Add to data
+            data["tags"] = tags_array
     
     return data, narrations
 
@@ -68,7 +73,7 @@ def create(data, output_dir):
     narration_count = 0
     narration_data = []
     
-    for i, item in enumerate(data):
+    for i, item in enumerate(data["scenes"]):
         if "narration" not in item:
             continue
             

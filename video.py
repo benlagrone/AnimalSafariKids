@@ -38,6 +38,22 @@ def create(narrations, output_dir, output_filename, settings):
     frame_rate = video_settings.get("fps", 30)
     codec = video_settings.get("codec", "avc1")
     slide_speed_multiplier = video_settings.get("slide_speed_multiplier", 1)  # Default to 1 if not set
+
+        # Get branding settings
+    branding_settings = settings.get("branding", {})
+    logo_path = os.path.join("branding", branding_settings.get("logo", ""))
+    logo_x = branding_settings.get("logo-x", 5)  # offset from right
+    logo_y = branding_settings.get("logo-y", 5)  # offset from bottom
+    logo_scale = branding_settings.get("logo-scale", 0.1)
+        # Load and resize logo if it exists
+    logo = None
+    if os.path.exists(logo_path):
+        logo = cv2.imread(logo_path, cv2.IMREAD_UNCHANGED)  # Read with alpha channel
+        # Resize logo if needed (adjust size as needed)
+        logo_height = int(height * logo_scale)  # 10% of video height
+        aspect_ratio = logo.shape[1] / logo.shape[0]
+        logo_width = int(logo_height * aspect_ratio)
+        logo = cv2.resize(logo, (logo_width, logo_height))
     
         # Load narration data from JSON
     with open(os.path.join(output_dir, "narration.json"), "r") as f:
@@ -49,11 +65,35 @@ def create(narrations, output_dir, output_filename, settings):
     temp_video = os.path.join(output_dir, "temp_video.mp4")
     out = cv2.VideoWriter(temp_video, fourcc, frame_rate, (width, height))
 
+    def add_logo_to_frame(frame):
+        if logo is None:
+            return frame
+        
+        # Create a copy of the frame
+        result = frame.copy()
+        
+        # Calculate logo position from bottom right
+        pos_x = width - logo.shape[1] - logo_x
+        pos_y = height - logo.shape[0] - logo_y
+        
+        # If logo has alpha channel (PNG)
+        if logo.shape[2] == 4:
+            # Get alpha channel
+            alpha = logo[:, :, 3] / 255.0
+            # Get RGB channels
+            for c in range(3):
+                result[pos_y:pos_y+logo.shape[0], pos_x:pos_x+logo.shape[1], c] = \
+                    (1 - alpha) * result[pos_y:pos_y+logo.shape[0], pos_x:pos_x+logo.shape[1], c] + \
+                    alpha * logo[:, :, c]
+        else:
+            # If no alpha channel, just overlay the logo
+            result[pos_y:pos_y+logo.shape[0], pos_x:pos_x+logo.shape[1]] = logo[:, :, :3]
+            
+        return result
+
     for i, narration_item in enumerate(narration_data):
         current_image_path = os.path.join(output_dir, "images", f"image_{i+1}.png")
         current_image = cv2.imread(current_image_path)
-        
-        # Resize the current image to the target dimensions
         current_image = cv2.resize(current_image, (width, height))
 
         # Load the next image if it exists
@@ -62,35 +102,38 @@ def create(narrations, output_dir, output_filename, settings):
             next_image = cv2.imread(next_image_path)
             next_image = cv2.resize(next_image, (width, height))
         else:
-            next_image = np.zeros((height, width, 3), dtype=np.uint8)  # Black if no next image
+            next_image = np.zeros((height, width, 3), dtype=np.uint8)
 
-        # Display the current image for its duration
-        # narration = os.path.join(output_dir, "narrations", f"narration_{i+1}.mp3")
-        # duration = get_audio_duration(narration)
-        # frames_for_image = int((duration / 1000) * frame_rate)
-        frames_for_narration = int((narration_item["duration"] / 1000) * frame_rate)
+        # Calculate frames for this narration
+        duration_ms = narration_item["duration"]
+        frames_for_narration = int((duration_ms / 1000) * frame_rate)
 
         if i + 1 < len(narration_data):
             # For images with transitions, reserve frames for the slide effect
             slide_frames = int(frame_rate / slide_speed_multiplier)
             static_frames = frames_for_narration - slide_frames
             
-            # Write the static image frames
+            # Write the static image frames with logo
             for _ in range(static_frames):
-                out.write(current_image)
+                frame_with_logo = add_logo_to_frame(current_image)
+                out.write(frame_with_logo)
 
-            # Add sliding effect
+            # Add sliding effect with logo
             for frame in range(slide_frames):
                 offset = int((frame / slide_frames) * width)
                 offset = min(offset, width - 1)
                 
                 slide_image = next_image.copy()
                 slide_image[:, :width-offset] = current_image[:, offset:]
-                out.write(slide_image)
+                
+                # Add logo to the slide frame
+                frame_with_logo = add_logo_to_frame(slide_image)
+                out.write(frame_with_logo)
         else:
             # For the last image, no transition needed
             for _ in range(frames_for_narration):
-                out.write(current_image)
+                frame_with_logo = add_logo_to_frame(current_image)
+                out.write(frame_with_logo)
 
     out.release()
     cv2.destroyAllWindows()

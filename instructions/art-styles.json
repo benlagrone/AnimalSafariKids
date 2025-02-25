@@ -1,0 +1,1374 @@
+{
+  "art_movements": [
+    {
+      "name": "Baroque",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Dramatic light contrasts (chiaroscuro)",
+          "description": "Baroque art often features stark contrasts between light and dark, creating a dramatic and theatrical effect that highlights the emotional intensity of the scene."
+        },
+        {
+          "name": "Emotional intensity",
+          "description": "Baroque artists aimed to evoke strong emotions in the viewer, often depicting scenes of intense drama, passion, and movement."
+        },
+        {
+          "name": "Dynamic compositions",
+          "description": "Baroque compositions are characterized by their sense of movement and energy, with swirling lines and complex arrangements that draw the viewer's eye through the artwork."
+        }
+      ]
+    },
+    {
+      "name": "Renaissance",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Symmetry, harmony, idealized human forms",
+          "description": "Renaissance art emphasizes balance and proportion, often depicting the human body in an idealized, harmonious way that reflects classical ideals of beauty."
+        },
+        {
+          "name": "Architectural details",
+          "description": "Renaissance artists often included detailed architectural elements in their works, drawing inspiration from classical Greek and Roman structures."
+        },
+        {
+          "name": "Linear perspective to create depth and spatial realism",
+          "description": "The use of linear perspective allowed Renaissance artists to create a sense of depth and three-dimensionality in their paintings, making the scenes appear more realistic."
+        }
+      ]
+    },
+    {
+      "name": "Northern Renaissance",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Detailed natural landscapes",
+          "description": "Northern Renaissance artists were known for their meticulous attention to detail, particularly in their depictions of natural landscapes and everyday life."
+        },
+        {
+          "name": "Moral allegory and rich symbolism",
+          "description": "Many Northern Renaissance works contain layers of symbolism and moral messages, often conveyed through intricate details and hidden meanings."
+        },
+        {
+          "name": "Used oil paints to create rich textures and vibrant colors",
+          "description": "The use of oil paints allowed Northern Renaissance artists to achieve a high level of detail and vibrant color in their works, enhancing the overall realism."
+        }
+      ]
+    },
+    {
+      "name": "Dutch Golden Age",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Detailed domestic scenes",
+          "description": "Dutch Golden Age artists often focused on scenes of everyday life, capturing the beauty and complexity of ordinary moments with great detail."
+        },
+        {
+          "name": "Warm natural lighting",
+          "description": "These artists skillfully used light to create a warm, inviting atmosphere in their paintings, often highlighting the textures and details of the scene."
+        },
+        {
+          "name": "Focus on everyday life",
+          "description": "The art of the Dutch Golden Age often celebrated the simplicity and beauty of daily life, depicting scenes of domesticity, work, and leisure."
+        }
+      ]
+    },
+    {
+      "name": "Pre-Raphaelite",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Intricate botanical details",
+          "description": "Pre-Raphaelite artists paid close attention to the natural world, often including detailed and accurate depictions of plants and flowers in their works."
+        },
+        {
+          "name": "Vibrant colors",
+          "description": "The use of bright, vivid colors is a hallmark of Pre-Raphaelite art, creating a sense of richness and intensity."
+        },
+        {
+          "name": "Emphasis on beauty and purity",
+          "description": "Pre-Raphaelite works often idealize beauty and purity, depicting subjects with a sense of innocence and grace."
+        }
+      ]
+    },
+    {
+      "name": "Romanticism",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Emotion-driven",
+          "description": "Romanticism is characterized by its focus on emotion and individual experience, often depicting scenes of intense passion, drama, and personal struggle."
+        },
+        {
+          "name": "Dramatic landscapes",
+          "description": "Romantic artists frequently painted dramatic, awe-inspiring landscapes that evoke a sense of the sublime and the power of nature."
+        },
+        {
+          "name": "Contrasts between light and shadow",
+          "description": "The use of light and shadow in Romantic art enhances the emotional impact of the scene, creating a sense of depth and drama."
+        }
+      ]
+    },
+    {
+      "name": "Neoclassical",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Clean lines",
+          "description": "Neoclassical art is characterized by its clear, precise lines and orderly compositions, reflecting the influence of classical Greek and Roman art."
+        },
+        {
+          "name": "Symmetrical composition",
+          "description": "Neoclassical works often feature balanced, symmetrical arrangements that convey a sense of order and harmony."
+        },
+        {
+          "name": "Emphasis on moral clarity and virtue",
+          "description": "Neoclassical artists aimed to convey moral messages and ideals of virtue, often depicting scenes from classical mythology or history."
+        }
+      ]
+    },
+    {
+      "name": "Baroque",
+      "negative":"",
+      "characteristics": [
+        {
+          "name": "Dramatic light contrasts (chiaroscuro)",
+          "description": "Baroque art often features stark contrasts between light and dark, creating a dramatic and theatrical effect that highlights the emotional intensity of the scene."
+        },
+        {
+          "name": "Emotional intensity",
+          "description": "Baroque artists aimed to evoke strong emotions in the viewer, often depicting scenes of intense drama, passion, and movement."
+        },
+        {
+          "name": "Dynamic compositions",
+          "description": "Baroque compositions are characterized by their sense of movement and energy, with swirling lines and complex arrangements that draw the viewer's eye through the artwork."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Renaissance",
+      "characteristics": [
+        {
+          "name": "Symmetry, harmony, idealized human forms",
+          "description": "Renaissance art emphasizes balance and proportion, often depicting the human body in an idealized, harmonious way that reflects classical ideals of beauty."
+        },
+        {
+          "name": "Architectural details",
+          "description": "Renaissance artists often included detailed architectural elements in their works, drawing inspiration from classical Greek and Roman structures."
+        },
+        {
+          "name": "Linear perspective to create depth and spatial realism",
+          "description": "The use of linear perspective allowed Renaissance artists to create a sense of depth and three-dimensionality in their paintings, making the scenes appear more realistic."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Northern Renaissance",
+      "characteristics": [
+        {
+          "name": "Detailed natural landscapes",
+          "description": "Northern Renaissance artists were known for their meticulous attention to detail, particularly in their depictions of natural landscapes and everyday life."
+        },
+        {
+          "name": "Moral allegory and rich symbolism",
+          "description": "Many Northern Renaissance works contain layers of symbolism and moral messages, often conveyed through intricate details and hidden meanings."
+        },
+        {
+          "name": "Used oil paints to create rich textures and vibrant colors",
+          "description": "The use of oil paints allowed Northern Renaissance artists to achieve a high level of detail and vibrant color in their works, enhancing the overall realism."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Dutch Golden Age",
+      "characteristics": [
+        {
+          "name": "Detailed domestic scenes",
+          "description": "Dutch Golden Age artists often focused on scenes of everyday life, capturing the beauty and complexity of ordinary moments with great detail."
+        },
+        {
+          "name": "Warm natural lighting",
+          "description": "These artists skillfully used light to create a warm, inviting atmosphere in their paintings, often highlighting the textures and details of the scene."
+        },
+        {
+          "name": "Focus on everyday life",
+          "description": "The art of the Dutch Golden Age often celebrated the simplicity and beauty of daily life, depicting scenes of domesticity, work, and leisure."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Pre-Raphaelite",
+      "characteristics": [
+        {
+          "name": "Intricate botanical details",
+          "description": "Pre-Raphaelite artists paid close attention to the natural world, often including detailed and accurate depictions of plants and flowers in their works."
+        },
+        {
+          "name": "Vibrant colors",
+          "description": "The use of bright, vivid colors is a hallmark of Pre-Raphaelite art, creating a sense of richness and intensity."
+        },
+        {
+          "name": "Emphasis on beauty and purity",
+          "description": "Pre-Raphaelite works often idealize beauty and purity, depicting subjects with a sense of innocence and grace."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Romanticism",
+      "characteristics": [
+        {
+          "name": "Emotion-driven",
+          "description": "Romanticism is characterized by its focus on emotion and individual experience, often depicting scenes of intense passion, drama, and personal struggle."
+        },
+        {
+          "name": "Dramatic landscapes",
+          "description": "Romantic artists frequently painted dramatic, awe-inspiring landscapes that evoke a sense of the sublime and the power of nature."
+        },
+        {
+          "name": "Contrasts between light and shadow",
+          "description": "The use of light and shadow in Romantic art enhances the emotional impact of the scene, creating a sense of depth and drama."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Neoclassical",
+      "characteristics": [
+        {
+          "name": "Clean lines",
+          "description": "Neoclassical art is characterized by its clear, precise lines and orderly compositions, reflecting the influence of classical Greek and Roman art."
+        },
+        {
+          "name": "Symmetrical composition",
+          "description": "Neoclassical works often feature balanced, symmetrical arrangements that convey a sense of order and harmony."
+        },
+        {
+          "name": "Emphasis on moral clarity and virtue",
+          "description": "Neoclassical artists aimed to convey moral messages and ideals of virtue, often depicting scenes from classical mythology or history."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Venetian Renaissance",
+      "characteristics": [
+        {
+          "name": "Vibrant, atmospheric light",
+          "description": "Venetian Renaissance artists are celebrated for their masterful use of light to create a sense of atmosphere and depth."
+        },
+        {
+          "name": "Harmonious compositions",
+          "description": "The balanced, harmonious arrangements in Venetian Renaissance works reflect the influence of classical ideals."
+        },
+        {
+          "name": "Blending natural beauty with divine themes",
+          "description": "Venetian Renaissance art often combines realistic depictions of nature with spiritual or divine subjects."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Italian Renaissance",
+      "characteristics": [
+        {
+          "name": "Idealized human forms",
+          "description": "Italian Renaissance artists aimed to depict the human body in an idealized, perfected way that reflects classical ideals of beauty."
+        },
+        {
+          "name": "Balanced compositions",
+          "description": "The use of symmetry and proportion creates a sense of balance and harmony in Italian Renaissance works."
+        },
+        {
+          "name": "Serene focus on divine symmetry and harmony",
+          "description": "Italian Renaissance art often conveys a sense of calm and order, reflecting the belief in a harmonious, divinely ordered universe."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Impressionism",
+      "characteristics": [
+        {
+          "name": "Soft brushstrokes",
+          "description": "Impressionist artists used loose, fluid brushstrokes to capture the fleeting effects of light and color."
+        },
+        {
+          "name": "Dynamic lighting",
+          "description": "The play of light and shadow is a key element in Impressionist works, creating a sense of movement and atmosphere."
+        },
+        {
+          "name": "Focus on capturing the emotional warmth and joy of communal faith",
+          "description": "Impressionist art often depicts scenes of everyday life with a sense of warmth and joy, celebrating the beauty of ordinary moments."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "High Renaissance",
+      "characteristics": [
+        {
+          "name": "Majestic compositions with idealized figures",
+          "description": "High Renaissance artists achieved a sense of grandeur and majesty in their works, often depicting idealized human forms."
+        },
+        {
+          "name": "Focus on the grandeur of divine moments",
+          "description": "High Renaissance art frequently explores themes of divine beauty and spiritual significance."
+        },
+        {
+          "name": "Unified compositions where each element contributes to the overall narrative or theme",
+          "description": "The careful arrangement of elements in High Renaissance works creates a cohesive and harmonious whole."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Romantic Allegory",
+      "characteristics": [
+        {
+          "name": "Sweeping landscapes",
+          "description": "Romantic allegorical works often feature expansive, dramatic landscapes that evoke a sense of the sublime."
+        },
+        {
+          "name": "Atmospheric lighting",
+          "description": "The use of light and shadow enhances the emotional impact of Romantic allegorical scenes."
+        },
+        {
+          "name": "Symbolic representations",
+          "description": "Romantic allegory often uses symbolic figures and elements to convey deeper meanings and themes."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Romantic Sublime",
+      "characteristics": [
+        {
+          "name": "Emphasizes the awe and grandeur of natural elements",
+          "description": "The Romantic sublime focuses on the power and majesty of nature, often depicting dramatic landscapes and natural phenomena."
+        },
+        {
+          "name": "Spiritual undertones",
+          "description": "Many works in this style convey a sense of spiritual awe and reverence for the natural world."
+        },
+        {
+          "name": "Dramatic contrasts",
+          "description": "The use of strong contrasts in light and color enhances the emotional impact of Romantic sublime works."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Arts and Crafts Movement",
+      "characteristics": [
+        {
+          "name": "Symmetry",
+          "description": "The Arts and Crafts Movement emphasizes balanced, symmetrical designs that reflect a sense of order and harmony."
+        },
+        {
+          "name": "Natural motifs",
+          "description": "Artists in this movement frequently incorporated natural forms and patterns into their designs, celebrating the beauty of the natural world."
+        },
+        {
+          "name": "Handcrafted quality",
+          "description": "The movement valued handcrafted work and traditional craftsmanship, often featuring intricate details and high-quality materials."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "3D model",
+      "characteristics": [
+        {
+          "name": "Dimensionality",
+          "description": "3D modeling involves creating objects and characters in three-dimensional space, allowing for depth, perspective, and realistic lighting effects."
+        },
+        {
+          "name": "Rendering Techniques",
+          "description": "Rendered using various lighting, shading, and texturing techniques, 3D models can achieve highly realistic or stylized visuals depending on the software and approach used."
+        },
+        {
+          "name": "Applications",
+          "description": "Used extensively in video games, animation, film, and product design, 3D models provide a versatile medium for both realism and creative stylization."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Anime",
+      "characteristics": [
+        {
+          "name": "Expressive Character Design",
+          "description": "Anime features highly expressive characters with exaggerated facial expressions, large eyes, and unique hairstyles, emphasizing emotion and personality."
+        },
+        {
+          "name": "Stylized Line Work",
+          "description": "Lines are often clean, with varied thickness to add depth and style, contributing to the distinctive aesthetic of anime."
+        },
+        {
+          "name": "Vivid Colors and Shading",
+          "description": "Anime employs vibrant color palettes, cel-shading techniques, and dramatic lighting effects to enhance mood and action scenes."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Cinematic",
+      "characteristics": [
+        {
+          "name": "Realistic Lighting",
+          "description": "Cinematic art often uses advanced lighting techniques like volumetric light, soft shadows, and bloom to create a film-like atmosphere."
+        },
+        {
+          "name": "Dramatic Composition",
+          "description": "Framing, perspective, and dynamic camera angles are carefully crafted to mimic the aesthetics of film cinematography."
+        },
+        {
+          "name": "Photo-Realism or Hyper-Stylization",
+          "description": "Depending on the artistic intent, cinematic art may aim for near-realistic renderings or highly stylized visuals to evoke emotions and narrative depth."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Comic book",
+      "characteristics": [
+        {
+          "name": "Bold Line Work",
+          "description": "Comic book art uses thick, defined lines to create strong silhouettes and dynamic character poses."
+        },
+        {
+          "name": "Panel-Based Storytelling",
+          "description": "The art is structured into panels, each carefully arranged to guide the reader’s eye through action, dialogue, and progression."
+        },
+        {
+          "name": "High Contrast Colors",
+          "description": "Often employs a limited but striking color palette with strong contrasts to enhance action and drama."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Clay",
+      "characteristics": [
+        {
+          "name": "Tactile Aesthetic",
+          "description": "Clay-based art, such as claymation or sculpted figures, has a unique, handcrafted look with visible textures and imperfections."
+        },
+        {
+          "name": "Stop-Motion Potential",
+          "description": "Frequently used in stop-motion animation, where physical clay models are manipulated frame by frame to create movement."
+        },
+        {
+          "name": "Soft and Organic Forms",
+          "description": "Often characterized by soft, rounded shapes and slightly exaggerated proportions due to the physical nature of sculpting."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Digital art",
+      "characteristics": [
+        {
+          "name": "Versatility",
+          "description": "Digital art encompasses a vast range of styles, from realistic painting to abstract design, all created using digital tools."
+        },
+        {
+          "name": "Layer-Based Editing",
+          "description": "Artists can manipulate layers, allowing for non-destructive changes, precise adjustments, and complex compositions."
+        },
+        {
+          "name": "Infinite Mediums",
+          "description": "With brushes, textures, and tools simulating traditional media, digital art can replicate any aesthetic, including oil painting, watercolor, and pixel art."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Enhance",
+      "characteristics": [
+        {
+          "name": "Hyper-Realistic Detailing",
+          "description": "Enhanced art styles focus on refining small details, improving sharpness, contrast, and clarity for a more polished visual."
+        },
+        {
+          "name": "AI and Post-Processing Techniques",
+          "description": "Often involves digital enhancements using artificial intelligence, sharpening tools, and noise reduction techniques."
+        },
+        {
+          "name": "Visual Clarity",
+          "description": "Ensures a crisp, high-quality finish by amplifying textures, lighting effects, and depth perception."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Fantasy art",
+      "characteristics": [
+        {
+          "name": "Mythical Themes",
+          "description": "Fantasy art often depicts supernatural beings, magic, and mythical creatures inspired by folklore and legend."
+        },
+        {
+          "name": "Exaggerated Atmosphere",
+          "description": "Features dramatic lighting, ethereal glows, and rich color palettes to create a sense of wonder and mysticism."
+        },
+        {
+          "name": "Detailed World-Building",
+          "description": "Highly intricate backgrounds and environments help immerse viewers in elaborate fantasy settings."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Illustration",
+      "characteristics": [
+        {
+          "name": "Hand-Drawn Quality",
+          "description": "Illustrations typically retain a hand-crafted feel, with varied line weight and personal artistic touches."
+        },
+        {
+          "name": "Narrative Emphasis",
+          "description": "Often used to visually represent stories, editorial concepts, or educational material through engaging visuals."
+        },
+        {
+          "name": "Adaptability",
+          "description": "Can be detailed or minimalistic, spanning from whimsical children’s book illustrations to intricate technical drawings."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Line art",
+      "characteristics": [
+        {
+          "name": "Minimalist Design",
+          "description": "Line art focuses on clean, precise lines with minimal shading to create distinct forms and silhouettes."
+        },
+        {
+          "name": "Monochromatic or Limited Color",
+          "description": "Typically uses black and white or a restrained color palette to emphasize shapes and outlines."
+        },
+        {
+          "name": "Expressive Flow",
+          "description": "Varied line thickness and fluid strokes enhance the movement and personality of the artwork."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Low poly",
+      "characteristics": [
+        {
+          "name": "Geometric Simplicity",
+          "description": "Low poly art consists of simple polygons with minimal textures, creating a stylized, blocky look."
+        },
+        {
+          "name": "Flat Shading",
+          "description": "Shading is often done in solid colors without smooth gradients, emphasizing the faceted nature of the models."
+        },
+        {
+          "name": "Game and Animation Use",
+          "description": "Commonly used in video games and animation for a retro or minimalist aesthetic with optimized performance."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Neon punk",
+      "characteristics": [
+        {
+          "name": "Vibrant Neon Colors",
+          "description": "Features bright, neon-lit color palettes dominated by pinks, blues, and purples, often contrasted with dark backgrounds."
+        },
+        {
+          "name": "Cyberpunk Aesthetic",
+          "description": "Draws inspiration from cyberpunk themes, incorporating futuristic cityscapes, holographic elements, and digital distortion."
+        },
+        {
+          "name": "High Contrast Glow Effects",
+          "description": "Utilizes glowing lights, heavy contrast, and sharp edges to create an electrifying, sci-fi feel."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Origami",
+      "characteristics": [
+        {
+          "name": "Paper-Like Appearance",
+          "description": "Designed to look like folded paper, with sharp creases and structured geometry."
+        },
+        {
+          "name": "Minimalist Complexity",
+          "description": "Despite its simplicity, origami-inspired art can achieve intricate and highly detailed forms using folds."
+        },
+        {
+          "name": "Strong Silhouettes",
+          "description": "Shapes are well-defined, with distinct edges and an emphasis on form rather than texture."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Photographic",
+      "characteristics": [
+        {
+          "name": "High Realism",
+          "description": "Strives to closely resemble real-life photography, with detailed textures, lighting, and depth of field."
+        },
+        {
+          "name": "Dynamic Composition",
+          "description": "Uses camera angles, perspective, and focus techniques similar to traditional photography."
+        },
+        {
+          "name": "Post-Processing Effects",
+          "description": "May include adjustments like color grading, sharpening, and depth enhancements for added realism."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Futuristic",
+      "characteristics": [
+        {
+          "name": "Advanced Technology Aesthetic",
+          "description": "Futuristic art often depicts sleek, high-tech environments, cutting-edge gadgets, and advanced artificial intelligence systems."
+        },
+        {
+          "name": "Minimalist or Complex Designs",
+          "description": "Can range from minimal, clean, and smooth surfaces to intricate, detailed designs featuring mechanical and digital elements."
+        },
+        {
+          "name": "Bright and Metallic Colors",
+          "description": "Frequently incorporates metallic hues, glowing neon lights, and a blend of high-contrast or reflective surfaces to enhance the futuristic appeal."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Cyber",
+      "characteristics": [
+        {
+          "name": "Digital Influence",
+          "description": "Cyber-themed art emphasizes digital interfaces, computer-generated visuals, and glitch effects, often referencing modern or near-future technologies."
+        },
+        {
+          "name": "Virtual Reality Aesthetic",
+          "description": "Features elements such as holograms, augmented reality overlays, and grid-based environments to create an immersive technological experience."
+        },
+        {
+          "name": "Monochrome or Neon Palette",
+          "description": "Often uses dark backgrounds with glowing neon lines, digital artifacts, and a high-tech atmosphere to emphasize its cybernetic roots."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Cyberpunk",
+      "characteristics": [
+        {
+          "name": "Dystopian Futurism",
+          "description": "Cyberpunk art presents a high-tech, low-life society filled with neon-lit cities, megacorporations, and a blend of cybernetic enhancements."
+        },
+        {
+          "name": "Neon and High Contrast",
+          "description": "Vivid neon colors, particularly blues, purples, and pinks, contrast against dark, gritty urban environments to create a striking aesthetic."
+        },
+        {
+          "name": "Urban Decay and Tech Fusion",
+          "description": "Cyberpunk worlds are characterized by worn-down, industrial architecture mixed with cutting-edge cybernetics and futuristic technology."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Steampunk",
+      "characteristics": [
+        {
+          "name": "Victorian Aesthetic",
+          "description": "Steampunk combines elements of 19th-century fashion, architecture, and machinery with a speculative, alternate-history twist."
+        },
+        {
+          "name": "Brass, Gears, and Steam",
+          "description": "Intricate mechanical gears, brass fittings, steam-powered engines, and airships define the visual language of steampunk art."
+        },
+        {
+          "name": "Retro-Futurism",
+          "description": "Merges historical influences with advanced, often anachronistic technology, creating a unique blend of old-world charm and mechanical innovation."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Dieselpunk",
+      "characteristics": [
+        {
+          "name": "Industrial and Military Aesthetic",
+          "description": "Dieselpunk is heavily inspired by early 20th-century technology, particularly the aesthetics of World War I and II-era machinery, vehicles, and architecture."
+        },
+        {
+          "name": "Dark and Gritty Tones",
+          "description": "Unlike steampunk’s brass and elegance, dieselpunk features rugged, industrial textures, dark metal tones, and a heavier emphasis on utilitarian design."
+        },
+        {
+          "name": "Alternate History",
+          "description": "Often depicts a world where advanced diesel-powered machines, armored vehicles, and wartime technology shaped an alternate version of history."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "80s Retro-Futurism",
+      "characteristics": [
+        {
+          "name": "Sleek, Optimistic Design",
+          "description": "This style envisions a future where technology is seamlessly integrated into society. Buildings, vehicles, and infrastructure are smooth, aerodynamic, and designed with both aesthetics and function in mind."
+        },
+        {
+          "name": "Expansive and Grand Architecture",
+          "description": "Urban environments feature large, sweeping structures, bold geometric shapes, and multi-tiered highways, often depicted with vast perspectives that evoke a sense of wonder and progress."
+        },
+        {
+          "name": "Vibrant Neon and Metallic Color Palette",
+          "description": "Colors include a mix of warm metallics (gold, bronze, and brushed aluminum) with neon blues, purples, and magentas, reinforcing a futuristic yet energetic 80s aesthetic."
+        },
+        {
+          "name": "Advanced Vehicles and Transportation Concepts",
+          "description": "Automobiles, aircraft, and public transit are highly stylized, often featuring smooth, aerodynamic forms, bubble canopies, and seamless exteriors that suggest efficiency and speed."
+        },
+        {
+          "name": "Bright Utopian Vision of the Future",
+          "description": "Unlike dystopian cyberpunk, this style leans toward an optimistic future where technology has improved daily life, with clean environments, efficient transportation, and advanced robotics assisting humanity."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Wasteland Punk",
+      "characteristics": [
+        {
+          "name": "Rugged, Improvised Technology",
+          "description": "Vehicles, weapons, and structures are assembled from salvaged parts, scrap metal, and repurposed machinery, often appearing rough, rusted, and built for function over form."
+        },
+        {
+          "name": "Harsh, Desolate Landscapes",
+          "description": "Settings are often vast wastelands, barren deserts, and ruined cities, emphasizing a world stripped of resources and dominated by survivalism."
+        },
+        {
+          "name": "Aggressive, Brutalist Aesthetic",
+          "description": "Designs incorporate spiked armor, exposed engines, industrial welding, and asymmetrical forms, creating a look of raw power and violence."
+        },
+        {
+          "name": "Dirt, Rust, and Earthy Color Palettes",
+          "description": "The color scheme leans heavily on rusted reds, dirty browns, sand-washed yellows, and blackened metals, reinforcing the harsh, decayed environment."
+        },
+        {
+          "name": "Survivalist and Tribal Elements",
+          "description": "Characters and factions reflect a scavenger-based society, often wearing repurposed military gear, leather armor, and warpaint, with a culture shaped by violence and resource control."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Skybound Adventurism",
+      "characteristics": [
+        {
+          "name": "Golden Age Aviation Aesthetic",
+          "description": "Inspired by the 1920s-1940s aviation era, this style features classic propeller-driven aircraft, amphibious planes, and sky pirates flying in colorful, streamlined designs."
+        },
+        {
+          "name": "Romanticized Adventure",
+          "description": "A world of daring pilots, smugglers, sky captains, and air races, where aviation is central to exploration, trade, and conflict in a setting filled with floating islands, hidden airstrips, and remote exotic locations."
+        },
+        {
+          "name": "Diesel-Era Technology with a Whimsical Touch",
+          "description": "Aircraft, vehicles, and gadgets are inspired by real-world 1930s and 40s engineering but with exaggerated designs, bright colors, and a sense of fun rather than heavy realism."
+        },
+        {
+          "name": "Warm and Vibrant Color Palette",
+          "description": "Instead of the grimy industrial tones of dieselpunk, this style embraces warm, sunlit skies, deep blues, reds, and yellows, evoking a sense of nostalgia and excitement."
+        },
+        {
+          "name": "Pulp Fiction and Heroic Archetypes",
+          "description": "Characters are larger-than-life, often embodying classic archetypes like the ace pilot, the daring mechanic, the sky pirate, or the rogue captain, creating a world full of high-flying drama and camaraderie."
+        }
+      ]
+    },
+    {
+      "negative":"asymmetrical features, bad posture, disproportionate anatomy, low-quality rendering, overly smooth textures, floating, unnatural poses, awkward jumps, gravity-defying, deformed anatomy, misplaced limbs, extra body parts, fused features, multiple heads, unnatural joints, distorted structure",
+      "name": "Naturalist Realism",
+      "characteristics": [
+        {
+          "name": "Highly Detailed Photorealism",
+          "description": "A highly detailed, photorealistic depiction of the animal, showcasing natural fur texture, well-defined musculature, and anatomically precise structure. Every detail is rendered with scientific accuracy, ensuring a lifelike representation suitable for wildlife documentation or zoological study."
+        },
+        {
+          "name": "Authentic Natural Lighting",
+          "description": "Realistic, atmospheric lighting conditions that replicate real-world environments. Sunlight filtering through foliage, overcast skies casting soft shadows, or the warm golden hues of sunset enhance depth and realism, mimicking professional wildlife photography."
+        },
+        {
+          "name": "True-to-Life Color Accuracy",
+          "description": "Colors are precisely matched to real-world hues of animals and their environments. The rendering avoids artificial saturation or stylization, ensuring scientifically accurate pigmentation, shading, and environmental tones for a natural and immersive aesthetic."
+        },
+        {
+          "name": "Dynamic Yet Documentary Composition",
+          "description": "A carefully framed wildlife scene that mirrors real-life photography, featuring animals in candid, natural behaviors—hunting, resting, or interacting within their ecosystem. The composition emphasizes storytelling while maintaining the integrity of a documentary-style image."
+        },
+        {
+          "name": "Environmental Integration",
+          "description": "The animal is seamlessly placed within its true habitat, surrounded by accurately rendered vegetation, terrain, and weather conditions. The scene captures the ecological balance, reinforcing a fully immersive and scientifically accurate wildlife depiction."
+        }
+      ]
+    },
+    {
+      "name": "Wildlife Storybook Realism",
+      "negative":"asymmetrical features, bad posture, disproportionate anatomy, low-quality rendering, overly smooth textures,floating, unnatural poses, awkward jumps, gravity-defying, deformed anatomy, misplaced limbs, extra body parts, fused features, multiple heads, unnatural joints, distorted structure",
+      "characteristics": [
+        {
+          "name": "Softened Photorealism",
+          "description": "While still detailed, the depiction of animals is slightly softened with gentle textures and expressive eyes to make them more approachable for younger audiences."
+        },
+        {
+          "name": "Warm and Vibrant Colors",
+          "description": "The color palette leans towards brighter, more inviting tones that make nature feel magical and inviting rather than purely documentary."
+        },
+        {
+          "name": "Dynamic and Playful Composition",
+          "description": "Scenes emphasize movement and life—frogs leaping, birds soaring, and deer curiously peeking from behind trees—to engage children’s imagination."
+        },
+        {
+          "name": "Illustrated Backgrounds with Soft Details",
+          "description": "Landscapes and environments are detailed but stylized, ensuring clarity and readability without overwhelming younger viewers with excessive complexity."
+        },
+        {
+          "name": "Educational and Narrative Elements",
+          "description": "Often paired with captions or storytelling elements that teach kids about the animals and their habitats in a way that feels adventurous and fun."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Victorian Expedition Sketchwork",
+      "characteristics": [
+        {
+          "name": "Hand-Drawn Naturalist Illustrations",
+          "description": "Inspired by the field sketches and watercolors of Victorian-era explorers, animals are depicted with precision but also with the artistic flair of a well-traveled gentleman scholar."
+        },
+        {
+          "name": "Sepia and Earth-Toned Palettes",
+          "description": "Colors are rendered in faded inks, watercolor washes, and warm sepia tones, emulating the aged sketches found in 19th-century field journals."
+        },
+        {
+          "name": "Intricate Annotations and Labels",
+          "description": "Animals are often accompanied by handwritten scientific notes, species names in Latin, and field observations in elegant, old-world penmanship."
+        },
+        {
+          "name": "Classic Composition with Ornate Borders",
+          "description": "Each page may feature elegant framing, filigree borders, or decorative elements that reflect the Victorian era’s obsession with aesthetics and order."
+        },
+        {
+          "name": "Textured, Aged Paper Aesthetic",
+          "description": "The art appears on weathered parchment or thick, textured sketchbook pages, adding to the authenticity of an explorer's personal collection."
+        }
+      ]
+    },
+    {
+      "negative":"",
+      "name": "Frontier Documentary Photography",
+      "characteristics": [
+        {
+          "name": "Glass Plate Photographic Detail",
+          "description": "Animals are captured in the rich, high-contrast tones of early black-and-white photography, emphasizing texture and form over color."
+        },
+        {
+          "name": "Soft Focus and Long Exposure Effects",
+          "description": "Due to the limitations of early photography, some images have slight motion blur or soft-focus edges, lending them an ethereal, historical quality."
+        },
+        {
+          "name": "Dramatic Framing and Vast Landscapes",
+          "description": "Composition is inspired by the work of early field photographers, often placing animals against grand, sweeping backdrops of the American frontier."
+        },
+        {
+          "name": "Aged, Worn Aesthetic",
+          "description": "Photographs appear as though they’ve been stored in a Smithsonian archive—complete with faded edges, minor scratches, and handwritten archival markings."
+        },
+        {
+          "name": "Historical Context and Anthropological Elements",
+          "description": "Some images might feature notes from early explorers, wax-sealed documentation, or maps, grounding the imagery in the spirit of discovery and preservation."
+        }
+      ]
+    },
+    [
+      {
+      "negative":"",
+      "name": "Modern Infographic Realism",
+        "characteristics": [
+          {
+            "name": "Clean 2D Infographics",
+            "description": "Uses high-contrast charts and easy-to-read data visualizations to present market trends, property values, and investment breakdowns."
+          },
+          {
+            "name": "Subtle 3D Depth",
+            "description": "Integrates isometric and subtle 3D elements to add depth while maintaining a minimalist and polished aesthetic."
+          },
+          {
+            "name": "Corporate Color Palette",
+            "description": "Uses blues, greys, and metallic tones to convey a sleek, professional feel suitable for real estate analysis."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Flat Vector Animation",
+        "characteristics": [
+          {
+            "name": "Minimalist Cartoon Aesthetic",
+            "description": "Uses simple, flat illustrations with bold colors and minimal shading to make real estate concepts easy to understand."
+          },
+          {
+            "name": "Animated Characters",
+            "description": "Features real estate agents, buyers, and investors in a friendly, cartoonish style to create engaging storytelling."
+          },
+          {
+            "name": "Pop-Up Text and Graphics",
+            "description": "Includes animated labels, icons, and text bubbles to highlight key points in an accessible way."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Hand-Drawn Whiteboard Explainer",
+        "characteristics": [
+          {
+            "name": "Sketchy Black-and-White Drawings",
+            "description": "Illustrations appear as if being drawn in real-time, mimicking the style of a traditional whiteboard explainer video."
+          },
+          {
+            "name": "Minimal Color Use",
+            "description": "Only key elements are highlighted in red or blue to emphasize important information."
+          },
+          {
+            "name": "Casual and Approachable Style",
+            "description": "The style mimics an informal educational approach, making complex topics feel accessible and engaging."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Luxury Cinematic 3D Rendering",
+        "characteristics": [
+          {
+            "name": "Photorealistic 3D Environments",
+            "description": "Uses ultra-high-quality 3D renders of luxury homes, skyscrapers, and high-end real estate interiors."
+          },
+          {
+            "name": "Cinematic Lighting Effects",
+            "description": "Applies slow-motion sequences, lens flares, and depth-of-field to highlight elegance and sophistication."
+          },
+          {
+            "name": "Luxury Branding Colors",
+            "description": "Emphasizes deep blues, golds, and blacks to create a prestigious and aspirational aesthetic."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Retro Blueprint & Architectural Sketch",
+        "characteristics": [
+          {
+            "name": "Blueprint Aesthetic",
+            "description": "Uses classic white-on-blue grid visuals, mimicking technical architectural plans."
+          },
+          {
+            "name": "Hand-Sketched Elements",
+            "description": "Incorporates hand-drawn overlays and faded paper textures to enhance authenticity."
+          },
+          {
+            "name": "Animated Floor Plans",
+            "description": "Dynamic transitions between sketches and finished renderings to show property evolution."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Neon Tech HUD (Heads-Up Display)",
+        "characteristics": [
+          {
+            "name": "Futuristic Interface Design",
+            "description": "Features holographic elements, scanning effects, and augmented reality overlays."
+          },
+          {
+            "name": "High-Tech Color Palette",
+            "description": "Uses glowing neon blues, purples, and greens against dark backdrops for a cyber-futuristic aesthetic."
+          },
+          {
+            "name": "Dynamic Zoom and Motion Graphics",
+            "description": "Utilizes fast-moving UI elements to simulate an interactive real estate data experience."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Vintage 1950s Real Estate Cartoon",
+        "characteristics": [
+          {
+            "name": "Mid-Century Cartoon Style",
+            "description": "Inspired by 1950s advertising and educational films, using clean inked lines and simple character designs."
+          },
+          {
+            "name": "Muted Pastel Color Palette",
+            "description": "Employs soft pastel shades with thick linework, reminiscent of vintage illustrations."
+          },
+          {
+            "name": "Narrative-Driven Storytelling",
+            "description": "Uses retro-style voiceover and exaggerated expressions to create a nostalgic, lighthearted tone."
+          }
+        ]
+      },
+      {
+      "negative":"deformed, extra limbs, extra legs, malformed, distorted, bad anatomy, missing limbs, disconnected limbs, broken legs, surreal, ugly, disfigured, mutated, blurry, bad proportion, duplicate, fused body parts, unnatural positions, bad perspective",
+      "name": "Photorealistic Nature & Property Documentary",
+        "characteristics": [
+          {
+            "name": "High-Definition Wildlife and Landscape Footage",
+            "description": "Features stunning nature cinematography to emphasize eco-friendly real estate."
+          },
+          {
+            "name": "Golden-Hour Lighting",
+            "description": "Uses natural, warm sunlight to create an inviting and authentic atmosphere."
+          },
+          {
+            "name": "Documentary-Style Narration",
+            "description": "Professional voiceover with soft orchestral music to enhance storytelling."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Minimalist Scandinavian Design",
+        "characteristics": [
+          {
+            "name": "Soft, Airy Color Palette",
+            "description": "Uses whites, greys, and pastels to reflect modern, clean Scandinavian interior aesthetics."
+          },
+          {
+            "name": "Geometric and Simplified UI",
+            "description": "Employs subtle typography and neat data overlays to highlight home details."
+          },
+          {
+            "name": "Smooth, Minimalist 3D Renders",
+            "description": "Showcases uncluttered, sleek home designs in an elegant presentation."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "Comic Book Real Estate Stories",
+        "characteristics": [
+          {
+            "name": "Bold, Inked Line Art",
+            "description": "Heavy comic-style outlines and exaggerated shading for dynamic visual storytelling."
+          },
+          {
+            "name": "Panel-Based Layout",
+            "description": "Sequences real estate transactions and market trends like a graphic novel."
+          },
+          {
+            "name": "High-Energy Color Contrast",
+            "description": "Uses dramatic red, blue, and black shading with halftone textures for an old-school comic aesthetic."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "3D Isometric City Builder",
+        "characteristics": [
+          {
+            "name": "Low-Poly Isometric Design",
+            "description": "Uses simplified 3D building models in an isometric perspective to visualize urban growth."
+          },
+          {
+            "name": "Time-Lapse City Evolution",
+            "description": "Shows gradual development of properties, neighborhoods, and entire cityscapes over time."
+          },
+          {
+            "name": "Color-Coded Zoning Overlays",
+            "description": "Uses color-coded markers to represent infrastructure, investment zones, and market trends."
+          }
+        ]
+      },
+      {
+      "negative":"",
+      "name": "AI-Generated Dreamlike Homes",
+        "characteristics": [
+          {
+            "name": "Surreal Architectural Concepts",
+            "description": "Features imaginative, AI-generated futuristic homes with floating elements and ethereal landscapes."
+          },
+          {
+            "name": "Soft, Glowing Textures",
+            "description": "Blends painterly styles with photorealistic elements for a dreamlike atmosphere."
+          },
+          {
+            "name": "Slow, Ethereal Camera Movements",
+            "description": "Uses gentle panning and atmospheric soundscapes to create a visionary real estate experience."
+          }
+        ]
+      },
+      [
+        {
+      "negative":"",
+      "name": "High-Gloss Luxury Ad",
+          "characteristics": [
+            {
+              "name": "Cinematic Camera Work",
+              "description": "Slow-motion tracking shots, drone flyovers, and perfectly framed interiors create a polished, ultra-high-end feel."
+            },
+            {
+              "name": "Rich Color Grading",
+              "description": "Deep, rich colors, golden-hour lighting, and smooth reflections enhance the luxury aesthetic."
+            },
+            {
+              "name": "Minimalist On-Screen Text",
+              "description": "Simple but elegant typography overlays highlight key selling points without distracting from the visuals."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Fast-Paced Urban Lifestyle Ad",
+          "characteristics": [
+            {
+              "name": "Dynamic Editing",
+              "description": "Quick cuts, zoom-ins, and split-screen compositions keep the energy high and engaging."
+            },
+            {
+              "name": "Vibrant City Footage",
+              "description": "Showcases bustling streets, stylish apartments, rooftop lounges, and modern co-working spaces."
+            },
+            {
+              "name": "Energetic Music and Voiceover",
+              "description": "Upbeat music and confident narration create excitement about urban real estate opportunities."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Heartwarming Family Home Ad",
+          "characteristics": [
+            {
+              "name": "Soft, Natural Lighting",
+              "description": "Warm, cozy lighting that enhances the feeling of home, love, and comfort."
+            },
+            {
+              "name": "Emotional Storytelling",
+              "description": "Scenes of families moving in, kids playing in the yard, and parents enjoying morning coffee create an emotional connection."
+            },
+            {
+              "name": "Narrative Voiceover",
+              "description": "A soft, reassuring voice-over tells a story about finding the perfect home and building a future."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Sleek Corporate Commercial",
+          "characteristics": [
+            {
+              "name": "Modern, Minimalist Design",
+              "description": "Sharp lines, geometric transitions, and clean typography create a corporate, professional aesthetic."
+            },
+            {
+              "name": "High-Tech Motion Graphics",
+              "description": "Futuristic UI elements, market trends, and investment projections animated smoothly for a data-driven feel."
+            },
+            {
+              "name": "Serious, Professional Voiceover",
+              "description": "A deep, confident voice narrates key statistics, growth projections, and investment benefits."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Dream Home Fairytale Ad",
+          "characteristics": [
+            {
+              "name": "Soft-Focus Cinematic Look",
+              "description": "A dreamy, almost magical look with lens flares, pastel colors, and gentle fades."
+            },
+            {
+              "name": "Slow-Paced, Poetic Narrative",
+              "description": "A storytelling approach that makes home-buying feel like a life-changing, emotional journey."
+            },
+            {
+              "name": "Sweeping Aerial Shots",
+              "description": "Drone flyovers of peaceful neighborhoods, rolling hills, and sunset-lit homes to create an inspiring mood."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Comedy-Driven Real Estate Ad",
+          "characteristics": [
+            {
+              "name": "Over-the-Top Humor",
+              "description": "Exaggerated acting, fast cuts, and comedic timing make real estate advertising fun and memorable."
+            },
+            {
+              "name": "Bright, Bold Colors",
+              "description": "A highly saturated color palette enhances the energetic, playful vibe of the commercial."
+            },
+            {
+              "name": "Conversational Voiceover",
+              "description": "A casual, almost comedic voiceover keeps the tone light and entertaining."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Retro 80s/90s Infomercial Style",
+          "characteristics": [
+            {
+              "name": "Low-Fi VHS Effects",
+              "description": "Classic 80s and 90s aesthetics with VHS tracking lines, neon grids, and bold fonts."
+            },
+            {
+              "name": "Over-the-Top Sales Pitch",
+              "description": "Exaggerated, enthusiastic delivery that makes the commercial feel nostalgic and fun."
+            },
+            {
+              "name": "Cheesy Graphics and Jingles",
+              "description": "Throwback-style logos, jingles, and starburst effects create an entertaining, nostalgic effect."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "High-Energy Sports-Style Ad",
+          "characteristics": [
+            {
+              "name": "Action-Packed Editing",
+              "description": "Fast-moving sequences, jump cuts, and high-energy music create an adrenaline-fueled effect."
+            },
+            {
+              "name": "Athletic, Competitive Tone",
+              "description": "Uses themes of winning, competition, and exclusivity to make real estate feel like a high-stakes game."
+            },
+            {
+              "name": "Dynamic Motion Graphics",
+              "description": "High-speed animation effects and bold typography for an intense, engaging feel."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Real Estate Documentary Commercial",
+          "characteristics": [
+            {
+              "name": "Authentic, Handheld Footage",
+              "description": "Uses a documentary-style approach with natural lighting and real interactions."
+            },
+            {
+              "name": "Personal Stories",
+              "description": "Features real people talking about their home-buying experiences or investment success stories."
+            },
+            {
+              "name": "Minimal Background Music",
+              "description": "Soft piano or subtle ambient music allows the storytelling to take center stage."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Animated 3D Explainer Ad",
+          "characteristics": [
+            {
+              "name": "Sleek, High-Tech 3D Animation",
+              "description": "Futuristic real estate visualizations with smooth camera movements and digital overlays."
+            },
+            {
+              "name": "Virtual Walkthroughs",
+              "description": "Detailed, lifelike renderings of homes and commercial spaces give viewers a virtual experience."
+            },
+            {
+              "name": "Voiceover with AI-Generated Effects",
+              "description": "A futuristic, slightly robotic voice-over enhances the high-tech branding."
+            }
+          ]
+        },
+        {
+      "negative":"low-quality, blurry, pixelated, distorted, overexposed, underexposed, harsh lighting, unnatural colors, overly saturated, unrealistic CGI, exaggerated cartoon style, chaotic composition, cluttered background, outdated furniture, old-fashioned interiors, grainy footage, fisheye distortion, low-resolution textures, excessive motion blur, awkward camera angles, unrealistic reflections, exaggerated HDR effects, artificial-looking characters, poorly staged homes, disorganized rooms, messy environments, poorly dressed agents, unfriendly expressions, poor posture, excessive lens flares, distracting visual effects, tacky typography, overly bold fonts, unnatural poses, forced facial expressions, dark and gloomy atmosphere, horror elements, dystopian themes, heavy noise, inconsistent color grading, eerie lighting, unbalanced framing, glitch effects, unnatural movements, robotic motion graphics, shaky camera, amateur footage, dull and lifeless visuals, chaotic typography, aggressive music, depressing tone, excessive branding, watermark, excessive animation, irrelevant content, cartoon-like characters, fake plants, artificial staging, unnatural proportions",
+      "name": "Modern Real Estate Service Commercial",
+          "characteristics": [
+            {
+              "name": "Clean and Professional Visuals",
+              "description": "Uses high-quality, well-lit footage of beautiful homes, modern offices, and friendly agents interacting with clients to establish trust and credibility."
+            },
+            {
+              "name": "Smooth Cinematic Camera Movements",
+              "description": "Includes drone shots of neighborhoods, slow-motion walkthroughs of properties, and close-up details of high-end interiors to showcase the quality of service."
+            },
+            {
+              "name": "Concise and Engaging Messaging",
+              "description": "A clear, warm voiceover or on-screen text that highlights key selling points such as market expertise, personalized service, and client success stories."
+            },
+            {
+              "name": "Modern, Minimalist Motion Graphics",
+              "description": "Subtle animations that display property details, client testimonials, and call-to-action messages without distracting from the visuals."
+            },
+            {
+              "name": "Uplifting Background Music",
+              "description": "A soft, inspiring instrumental soundtrack that creates an emotional connection without overpowering the message."
+            },
+            {
+              "name": "Clear Call-to-Action",
+              "description": "Ends with a strong CTA, such as 'Find Your Dream Home Today' or 'Contact Us for a Free Consultation,' paired with the company's website and phone number."
+            }
+          ]
+        },
+        {
+      "negative":"",
+      "name": "Professional Real Estate Photography Services",
+          "characteristics": [
+            {
+              "name": "Bright and Well-Lit Images",
+              "description": "Ensures every space looks inviting and vibrant by using natural light, professional lighting equipment, and post-processing to enhance brightness while maintaining a natural look."
+            },
+            {
+              "name": "Color Enhancement and Accuracy",
+              "description": "Adjusts color balance and saturation to make interiors and exteriors look rich and true-to-life, ensuring that details like wood textures, wall colors, and landscaping appear crisp and striking."
+            },
+            {
+              "name": "Wide-Angle and Perspective Correction",
+              "description": "Uses wide-angle lenses to capture full room views without distortion, while ensuring vertical lines are corrected so spaces appear natural and well-proportioned."
+            },
+            {
+              "name": "High-Resolution Detail",
+              "description": "Delivers ultra-sharp, high-resolution images that highlight fine details like countertops, flooring, and architectural features, making properties look their best."
+            },
+            {
+              "name": "Twilight and Golden Hour Photography",
+              "description": "Captures homes at the most visually appealing times of day, with warm sunset lighting or dramatic evening ambiance to create a high-end, luxury feel."
+            },
+            {
+              "name": "Drone and Aerial Photography",
+              "description": "Provides breathtaking overhead views of properties, neighborhoods, and surrounding landscapes to give potential buyers a comprehensive perspective."
+            },
+            {
+              "name": "Virtual Staging and Touch-Ups",
+              "description": "Uses digital enhancements to add furniture, remove minor imperfections, and create a more visually appealing presentation without misleading potential buyers."
+            },
+            {
+              "name": "Consistent Branding and Presentation",
+              "description": "Ensures all photos align with a professional aesthetic, helping realtors and property owners maintain a strong, polished image in their marketing materials."
+            }
+          ]
+        }
+      ]
+    ]
+  ]
+}

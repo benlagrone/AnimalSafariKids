@@ -10,6 +10,7 @@ import narration
 import images
 import video
 from openai import OpenAI
+import upload
 
 # Load environment variables from .env file
 load_dotenv()
@@ -97,7 +98,21 @@ for script_name in script_names:
         messages=[
             {
                 "role": "system",
-                "content": f"""You are a YouTube short narration generator. You should generate at least 8-10 sections of narration, each with its own image description. You generate {settings['script']['min-length']} to {settings['script']['max-length']} of narration. The shorts you create have a background that fades from image to image as the narration is going on.
+                "content": f"""You are a YouTube short narration generator. Your goal is to generate engaging, visually descriptive short-form content that will be used for AI-generated images and text-to-speech narration.
+
+Each short video consists of **8-10 sections**, with **each section containing**:
+- A **highly detailed image description** in square brackets **[]** (used for AI image generation)
+- A **1-2 sentence narration** (used for voice-over text)
+
+### **Important Rules for Image Descriptions**:
+ **Begin every description with "A close-up, highly detailed image of..."**  
+ **Focus on realism and clarity** – The AI will create images from this text  
+ **DO NOT mention names of real people or celebrities**  
+ **DO NOT include violence, hunting, or predatory behavior**  
+ **DO NOT reference sexual content or provocative imagery**  
+ **Keep all visuals family-friendly and educational**  
+ **Ensure the main subject of the image is clear and centered**  
+
 
 You will need to generate descriptions of images for each of the sentences in the short. They will be passed to an AI image generator. 
 
@@ -115,27 +130,28 @@ You are however allowed to use any content, including real names in the narratio
 Note that the narration will be fed into a text-to-speech engine, so don't use special characters.
 
 Respond with a pair of an image description in square brackets and a narration below it. Both of them should be on their own lines, as follows:
-
 ###
 Title: "Title of the video"
 
 Description: "Description of the video"
 
-[Description of a background image]
+Tags: ["tags","describing","content"]
+
+[close-up shot of the main subject. The scene is set in a natural or realistic environment with atmospheric lighting. The composition highlights the subject’s defining features and interactions with its surroundings. The background enhances realism with additional elements relevant to the setting.]
 
 Narrator: "One to 2 sentences of narration"
 
-[Description of a background image]
+[the main subject. The scene is set in a natural or realistic environment with atmospheric lighting. The composition highlights the subject’s defining features and interactions with its surroundings. The background enhances realism with additional elements relevant to the setting.]
 
 Narrator: "One to 2 sentences of narration"
 
-[Description of a background image]
+[main subject. The scene is set in a natural or realistic environment with atmospheric lighting. The composition highlights the subject’s defining features and interactions with its surroundings. The background enhances realism with additional elements relevant to the setting.]
 
 Narrator: "One to 2 sentences of narration"
 
 ###
 
-You should add a description of a fitting background image in between all of the narrations. It will later be used to generate an image with AI.
+You should add a description of the visual scene in between all of the narrations. It will later be used to generate a scene with AI.
 """
             },
             {
@@ -154,10 +170,10 @@ You should add a description of a fitting background image in between all of the
     data, narrations = narration.parse(response_text)
 
     # Add art style to each image description
-    for item in data:
-        if "image" in item:
-            art_style = get_random_art_style(settings["script"]["art"], art_styles)
-            item["art_style"] = art_style
+    for item in data["scenes"]:
+        # if "image" in item:
+        art_style = get_random_art_style(settings["script"]["art"], art_styles)
+        item["art_style"] = art_style
 
     with open(os.path.join(basedir, "data.json"), "w") as f:
         json.dump(data, f, ensure_ascii=False)
@@ -173,5 +189,16 @@ You should add a description of a fitting background image in between all of the
     video.create(narrations, basedir, output_file, settings)
 
     print(f"DONE! Here's your video: {os.path.join(basedir, output_file)}")
+
+        # Upload the video if enabled in settings
+    if settings.get("upload", {}).get("enabled", False):
+        print("Uploading video to YouTube...")
+        try:
+            video_id = upload.upload_video(basedir, settings)
+            print(f"Video uploaded successfully! ID: {video_id}")
+        except Exception as e:
+            print(f"Error uploading video: {str(e)}")
+    
+    print("Process complete!")
 
 print("All scripts processed.")

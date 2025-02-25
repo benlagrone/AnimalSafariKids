@@ -4,3 +4,8 @@ shorts/
 *.txt
 !response.txt
 !requirements.txt
+.DS_Store
+.env
+venv/
+./venv
+branding/

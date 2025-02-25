@@ -1,0 +1,172 @@
+[
+    {
+      "name": "Executive Real Estate Insights",
+      "characteristics": [
+        {
+          "name": "Sleek, High-Tech Visuals",
+          "description": "Dark blue, gold, and silver color schemes with clean, professional design."
+        },
+        {
+          "name": "Cinematic B-Roll",
+          "description": "Luxury property footage, commercial buildings, and corporate environments."
+        },
+        {
+          "name": "Data-Driven Animations",
+          "description": "Includes market charts, ROI comparisons, and financial trends."
+        }
+      ]
+    },
+    {
+      "name": "Neighborhood Explorer",
+      "characteristics": [
+        {
+          "name": "Drone Footage",
+          "description": "Aerial views of neighborhoods, parks, and local attractions."
+        },
+        {
+          "name": "POV Walkthroughs",
+          "description": "On-the-ground exploration of homes, schools, and community hotspots."
+        },
+        {
+          "name": "Conversational Tone",
+          "description": "Casual, vlog-style hosting to make viewers feel immersed in the experience."
+        }
+      ]
+    },
+    {
+      "name": "Real Estate Mythbusters",
+      "characteristics": [
+        {
+          "name": "Fast-Paced Editing",
+          "description": "Quick cuts, zoom-ins, and sound effects to maintain engagement."
+        },
+        {
+          "name": "Animated Infographics",
+          "description": "Visualized myth vs. reality comparisons."
+        },
+        {
+          "name": "Charismatic Host",
+          "description": "A dynamic presenter explaining common misconceptions."
+        }
+      ]
+    },
+    {
+      "name": "Market Watch",
+      "characteristics": [
+        {
+          "name": "Data-Driven Presentation",
+          "description": "Market trends, economic factors, and real estate statistics."
+        },
+        {
+          "name": "Serious, Finance-Style Narration",
+          "description": "Professional voice-over similar to Bloomberg or CNBC."
+        },
+        {
+          "name": "Stock Footage Integration",
+          "description": "Wall Street, construction sites, and boardroom meetings."
+        }
+      ]
+    },
+    {
+      "name": "Behind the Deal",
+      "characteristics": [
+        {
+          "name": "Documentary-Style Storytelling",
+          "description": "Follows a real estate investor through an actual deal."
+        },
+        {
+          "name": "Before-and-After Footage",
+          "description": "Property transformations and cost breakdowns."
+        },
+        {
+          "name": "Profit and Loss Analysis",
+          "description": "Detailed financial insights into real deals."
+        }
+      ]
+    },
+    {
+      "name": "Luxury Real Estate Showcase",
+      "characteristics": [
+        {
+          "name": "Ultra-High-Quality 4K Footage",
+          "description": "Showcasing mansions, penthouses, and high-end properties."
+        },
+        {
+          "name": "Elegant Cinematic Drone Shots",
+          "description": "Smooth aerial flyovers with dramatic lighting."
+        },
+        {
+          "name": "Minimalist, Classy Typography",
+          "description": "Elegant on-screen text highlighting key property features."
+        }
+      ]
+    },
+    {
+      "name": "Real Estate 101",
+      "characteristics": [
+        {
+          "name": "Simple, Clean Animations",
+          "description": "2D explainer-style graphics or whiteboard illustrations."
+        },
+        {
+          "name": "Step-by-Step Breakdown",
+          "description": "Educational format for beginners, like 'How to Get Pre-Approved for a Mortgage.'"
+        },
+        {
+          "name": "Casual, Friendly Narration",
+          "description": "Approachable voice-over with a clear, structured delivery."
+        }
+      ]
+    },
+    {
+      "name": "Off-Market Secrets",
+      "characteristics": [
+        {
+          "name": "Dark, High-Contrast Aesthetic",
+          "description": "Visuals feel exclusive, with a sense of 'insider knowledge.'"
+        },
+        {
+          "name": "High-Energy Editing",
+          "description": "Jump cuts, overlays, and text emphasizing key points."
+        },
+        {
+          "name": "Contrarian Advice",
+          "description": "Revealing lesser-known real estate strategies."
+        }
+      ]
+    },
+    {
+      "name": "House Flipping & DIY Real Estate",
+      "characteristics": [
+        {
+          "name": "Before-and-After Renovation Timelapses",
+          "description": "Fast-motion sequences showing home transformations."
+        },
+        {
+          "name": "On-Site Progress Updates",
+          "description": "Real-time reports from investors or flippers."
+        },
+        {
+          "name": "Budget and Cost Analysis",
+          "description": "Clear financial breakdowns of flipping projects."
+        }
+      ]
+    },
+    {
+      "name": "The Real Estate Hustle",
+      "characteristics": [
+        {
+          "name": "High-Energy Social Media Style",
+          "description": "Quick cuts, dynamic transitions, and animated overlays."
+        },
+        {
+          "name": "Motivational Success Stories",
+          "description": "Featuring investors who built wealth through real estate."
+        },
+        {
+          "name": "Entrepreneurial and Financial Growth Themes",
+          "description": "Emphasizing passive income, cash flow, and investment strategies."
+        }
+      ]
+    }
+  ]
