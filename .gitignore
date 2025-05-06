@@ -9,3 +9,4 @@ shorts/
 venv/
 ./venv
 branding/
+client_secret.json
