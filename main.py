@@ -11,16 +11,58 @@ import images
 import video
 from openai import OpenAI
 import upload
+import ollama
+
+from animalslist import create_animal_csv
+from animalscript import get_new_animals, create_animal_scripts
+
+# Get new animals and create scripts
+new_animals = get_new_animals()
+created_files = create_animal_scripts(new_animals)
 
 # Load environment variables from .env file
 load_dotenv()
 eleven_api_key = os.getenv('ELEVEN_API_KEY')
 openai_api_key = os.getenv('OPENAI_API_KEY')
-client = OpenAI(api_key=openai_api_key)
+# client = OpenAI(api_key=openai_api_key)
 
 # Load art styles
 with open("instructions/art-styles.json") as f:
     art_styles = json.load(f)["art_movements"]
+
+
+def update_settings_json(created_files):
+    # Read the current settings
+    with open('settings.json', 'r') as f:
+        settings = json.load(f)
+    
+    # Remove .txt extension from filenames
+    animal_names = [file.replace('.txt', '') for file in created_files]
+    
+    # Update the scripts list in settings
+    settings['script']['scripts'] = animal_names
+    
+    # Write the updated settings back to the file
+    with open('settings.json', 'w') as f:
+        json.dump(settings, f, indent=4)
+    
+    print(f"Updated settings.json with new animals: {', '.join(animal_names)}")
+
+
+def generate_narration_with_ollama(source_material):
+    # Load your local model using Ollama
+    model = 'mistral'  # or whatever model you want to use
+    
+    # Read the prompt from the file
+    with open('instructions/prompt.txt', 'r') as file:
+        prompt_template = file.read()
+    
+    # Construct the full prompt
+    prompt = prompt_template + f"\n\nCreate a YouTube short narration based on the following source material:\n\n{source_material}"
+    
+    # Generate the narration using the model
+    response = ollama.generate(model=model, prompt=prompt)
+    return response['response']  # Ollama returns a dict with 'response' key
 
 def get_random_art_style(script_art_styles, art_styles):
     """Get a random art style from the settings and retrieve its full data"""
@@ -40,6 +82,8 @@ def get_random_art_style(script_art_styles, art_styles):
 
     print(f"Warning: Art style '{selected_style_name}' not found in art-styles.json")
     return None
+
+update_settings_json(created_files)
 
 # Determine the settings file
 settings_file = "settings.json"
@@ -92,76 +136,10 @@ for script_name in script_names:
 
     print(f"Generating script for {script_name}...")
 
-    # Use source_material in the OpenAI API call
-    response = client.chat.completions.create(
-        model="gpt-4",
-        messages=[
-            {
-                "role": "system",
-                "content": f"""You are a YouTube short narration generator. Your goal is to generate engaging, visually descriptive short-form content that will be used for AI-generated images and text-to-speech narration.
 
-Each short video consists of **8-10 sections**, with **each section containing**:
-- A **highly detailed image description** in square brackets **[]** (used for AI image generation)
-- A **1-2 sentence narration** (used for voice-over text)
+    # response_text = response.choices[0].message.content
+    response_text = generate_narration_with_ollama(source_material)
 
-### **Important Rules for Image Descriptions**:
- **Begin every description with "A close-up, highly detailed image of..."**  
- **Focus on realism and clarity** – The AI will create images from this text  
- **DO NOT mention names of real people or celebrities**  
- **DO NOT include violence, hunting, or predatory behavior**  
- **DO NOT reference sexual content or provocative imagery**  
- **Keep all visuals family-friendly and educational**  
- **Ensure the main subject of the image is clear and centered**  
-
-
-You will need to generate descriptions of images for each of the sentences in the short. They will be passed to an AI image generator. 
-
-DO NOT IN ANY CIRCUMSTANCES use names of celebrities or people in the image descriptions. It is illegal to generate images of celebrities. Only describe persons without their names. Do not reference any real person or group in the image descriptions. Don't mention the female figure or other sexual content in the images because they are not allowed.
-- NO violence, hunting, or predatory behavior
-- NO animals attacking or killing each other
-- NO graphic or disturbing content
-- Focus on peaceful, natural behaviors and interactions
-- Show animals in their natural habitats doing everyday activities
-- Emphasize positive, educational content
-- Keep content family-friendly and suitable for all ages
-
-You are however allowed to use any content, including real names in the narration. Only image descriptions are restricted.
-
-Note that the narration will be fed into a text-to-speech engine, so don't use special characters.
-
-Respond with a pair of an image description in square brackets and a narration below it. Both of them should be on their own lines, as follows:
-###
-Title: "Title of the video"
-
-Description: "Description of the video"
-
-Tags: ["tags","describing","content"]
-
-[close-up shot of the main subject. The scene is set in a natural or realistic environment with atmospheric lighting. The composition highlights the subject’s defining features and interactions with its surroundings. The background enhances realism with additional elements relevant to the setting.]
-
-Narrator: "One to 2 sentences of narration"
-
-[the main subject. The scene is set in a natural or realistic environment with atmospheric lighting. The composition highlights the subject’s defining features and interactions with its surroundings. The background enhances realism with additional elements relevant to the setting.]
-
-Narrator: "One to 2 sentences of narration"
-
-[main subject. The scene is set in a natural or realistic environment with atmospheric lighting. The composition highlights the subject’s defining features and interactions with its surroundings. The background enhances realism with additional elements relevant to the setting.]
-
-Narrator: "One to 2 sentences of narration"
-
-###
-
-You should add a description of the visual scene in between all of the narrations. It will later be used to generate a scene with AI.
-"""
-            },
-            {
-                "role": "user",
-                "content": f"Create a YouTube short narration based on the following source material:\n\n{source_material}"
-            }
-        ]
-    )
-
-    response_text = response.choices[0].message.content
     response_text = response_text.replace("'", "'").replace("`", "'").replace("…", "...").replace(""", '"').replace(""", '"')
 
     with open(os.path.join(basedir, "response.txt"), "w") as f:
@@ -202,3 +180,6 @@ You should add a description of the visual scene in between all of the narration
     print("Process complete!")
 
 print("All scripts processed.")
+
+# Call the function when needed
+animal_names = create_animal_csv()

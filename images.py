@@ -39,7 +39,8 @@ def create_from_data(data, output_dir, caption_settings=None):
     n = image_settings.get("n", 1)
     # subject = image_settings.get("subject", "Cro-Magnons")
     effect = image_settings.get("effect", "Cinematic")
-    prompt_size = image_settings.get("prompt_size", "Cinematic")
+    prompt_size = image_settings.get("prompt_size", "small")
+    neg2 = image_settings.get("negative", "multiple heads, multiple horns, extra limbs, missing limbs, fused features, disproportionate anatomy, symmetrical errors, unnatural joints, overly smooth textures, low-quality rendering, floating body parts, deformed anatomy, cartoonish, cgi, painting, unnatural poses, awkward jumps, gravity-defying, watermark, text, signature")
     size = str(width) + 'x' + str(height)
     image_counter = 1  # Initialize a counter for saved images
 
@@ -48,10 +49,11 @@ def create_from_data(data, output_dir, caption_settings=None):
                 art_style = item.get("art_style", {})
                 # style_name = art_style.get("name", "").strip()
                 style_characteristics = art_style.get("characteristics", [])
-                neg = art_style.get("negative", "").strip()
+                neg = neg2
+                neg += art_style.get("negative", "").strip()
 
                 # Orientation and Effect Handling
-                style_prompt = f" {effect.lower()}"
+                style_prompt = f" {effect.lower()}, "
                 # style_prompt += "The scene embodies the following artistic characteristics: "
 
                 # Extract characteristics dynamically with proper sentence structure
@@ -69,7 +71,7 @@ def create_from_data(data, output_dir, caption_settings=None):
                             characteristic_texts.append(f"{char_desc}")
                 
                 # Join characteristics efficiently
-                style_prompt += "; ".join(characteristic_texts)
+                style_prompt += ", ".join(characteristic_texts)
 
                 # Constructing the final full prompt
                 full_prompt = (
@@ -79,32 +81,34 @@ def create_from_data(data, output_dir, caption_settings=None):
                     )
 
                 # Negative prompt to avoid distortions
-                negative_prompt = f"{neg}"
+                # negative_prompt = f"{neg}"
 
+                request_payload = image_settings
+                request_payload['prompt'] = full_prompt
+                request_payload['negative_prompt'] = neg
+                request_payload['seed'] = unique_seed
                 # API request payload
-                request_payload = {
-                    "model": model,
-                    "vae": "sd_xl_vae.safetensors",
-                    "prompt": full_prompt,
-                    "negative_prompt": neg,
-                    "width": 768,
-                    "height": 768,
-                    "steps": 40,
-                    "cfg_scale": 9.0,
-                    "sampler_index": "DPM++ 2M",
-                    "schedule_type": "Karras",
-                    "seed": unique_seed,
-                    "hr_scale": 1.0,
-                    "hr_upscaler": "4x-UltraSharp",
-                    "denoising_strength": 0.5,
-                    "batch_size": 1,
-                    "batch_count": 6,
-                    "enable_hr": False,
-                    "refiner_checkpoint": "sd_xl_refiner_1.0.safetensors",
-                    "refiner_switch_at": 0.6,
-                    "model_hash": "31e35c80fc",
-                    "version": "v1.10.1"
-                    }
+                # request_payload = {
+                #     "prompt": full_prompt,
+                #     "negative_prompt": neg,
+                #     "model": image_settings.get("model", "v1-5-pruned-emaonly.safetensors"),
+                #     "width": image_settings.get("width", 768),
+                #     "height": image_settings.get("height", 768),
+                #     "steps": image_settings.get("steps", 30),
+                #     "cfg_scale": image_settings.get("cfg_scale", 7.0),
+                #     "sampler_index":image_settings.get("sampler_index", "DPM++ 2M"),
+                #     "seed": unique_seed,
+                #     "batch_size": image_settings.get("batch_size", 1),
+                #     "batch_count": image_settings.get("batch_count", 6),
+                #     "enable_hr": image_settings.get("enable_hr", False),
+                #     "hr_scale": image_settings.get("hr_scale", 1.0),
+                #     "hr_upscaler": image_settings.get("hr_upscaler", "4x-UltraSharp"),
+                #     "denoising_strength": image_settings.get("denoising_strength", 0.5),
+                #     "refiner_checkpoint": image_settings.get("refiner_checkpoint", "sd_xl_refiner_1.0.safetensors"),
+                #     "refiner_switch_at": image_settings.get("refiner_switch_at", 0.6),
+                #     "model_hash": image_settings.get("model_hash", "31e35c80fc"),
+                #     "version": image_settings.get("version", "v1.10.1")
+                #     }
 
                 with open(os.path.join(prompt_log_dir, f"prompt_{image_counter}.json"), "w") as json_file:
                     json.dump(request_payload, json_file, indent=2)

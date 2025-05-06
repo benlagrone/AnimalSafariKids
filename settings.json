@@ -1,13 +1,13 @@
 {
-    "branding":{
-        "logo":"animal-safari-circle.png",
-        "logo-x":5,
-        "logo-y":5
+    "branding": {
+        "logo": "animal-safari-circle.png",
+        "logo-x": 5,
+        "logo-y": 5
     },
-    "upload":{
+    "upload": {
         "enabled": true,
-        "youtube_channel":"UCU1T3KZjLceczyfHr2aqpeQ",
-        "youtube_category":15
+        "youtube_channel": "UCU1T3KZjLceczyfHr2aqpeQ",
+        "youtube_category": 15
     },
     "captions": {
         "font": "/System/Library/Fonts/Supplemental/Chalkboard.ttc",
@@ -22,45 +22,51 @@
         "shadow_strength": 1.0,
         "shadow_blur": 0.1
     },
-    "script":{
-        "art":[
+    "script": {
+        "art": [
             "Naturalist Realism"
         ],
-        "focus":["Cinematic"],
-        "min-length":"2 minute",
-        "max-length":"3 minutes",
-        "scripts":["panda.txt","zebra.txt","cheetah.txt"]
+        "focus": [
+            "Cinematic"
+        ],
+        "min-length": "2 minute",
+        "max-length": "3 minutes",
+        "scripts": [
+            "okapi forest giraffe",
+            "pangolin leafcutter ant specialist",
+            "axolotl giant salamander",
+            "dugong solitary dolphin",
+            "tenrec honey badger"
+        ]
     },
     "video": {
         "fps": 30,
         "width": 720,
         "height": 1280,
         "codec": "avc1",
-        "slide_speed_multiplier":4
+        "slide_speed_multiplier": 4
     },
     "image": {
-        "model": "sd_xl_base_1.0.safetensors",
-        "prompt_size":"norm",
-        "size": "1024x1792",
-        "width":1536,
-        "height":1536,
-        "size2": "1792x1024",
-        "slide-px":10,
-        "quality": "standard",
-        "orientation":"portrait",
-        "n": 1,
-        "effect": "Cinematic",
+        "model": "Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors",
+        "vae": "sd_xl_vae.safetensors",
+        "prompt": "A close-up, photorealistic portrait of a single baby tapir (tapir calf) with its distinct spotted and striped coat, nibbling on a leafy plant in a lush forest environment. The scene captures lifelike textures, realistic lighting, and the gentle expression of the calf. The environment is a natural, green backdrop with soft, warm light reminiscent of professional wildlife photography.",
+        "negative_prompt": "multiple eyes, extra eyes, multiple heads, extra limbs, missing limbs, fused features, disproportionate anatomy, symmetrical errors, unnatural joints, overly smooth textures, low-quality rendering, floating body parts, painting, cartoonish, cgi, watermark, text, signature, unnatural poses, awkward jumps, deformed anatomy, blurred, disfigured, incomplete, symmetrical anomalies, cloned face, disembodied limbs",
+        "width": 720,
+        "height": 1280,
         "steps": 50,
-        "cfg_scale": 6.5,
-        "sampler_index": "DPM++ SDE Karras",
-        "hr_scale": 1.0,
-        "hr_upscaler": "ESRGAN_4x",
-        "denoising_strength": 0.3,
+        "cfg_scale": 8.5,
+        "sampler_index": "DPM++ 2M Karras",
+        "schedule_type": "Karras",
+        "seed": 662104,
         "batch_size": 1,
         "batch_count": 1,
-        "seed": -1,
-        "enable_hr": "true",
-        "refiner_checkpoint": "null",
-        "refiner_switch_at": 0.6
+        "enable_hr": false,
+        "hr_scale": 1.0,
+        "hr_upscaler": "4x-UltraSharp",
+        "denoising_strength": 0.35,
+        "refiner_checkpoint": "sd_xl_refiner_1.0.safetensors",
+        "refiner_switch_at": 0.6,
+        "model_hash": "YOUR_JUGGERNAUT_MODEL_HASH",
+        "version": "v1.10.1"
     }
 }
