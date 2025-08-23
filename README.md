@@ -52,3 +52,22 @@ The settings file can look like this, for example:
     "shadow_blur": 0.1
 }
 ```
+
+## Docker
+
+Build the Docker image:
+
+```bash
+docker build -t shortrocity .
+```
+
+Run the tool by mounting your working directory and providing a source file:
+
+```bash
+docker run --rm -v "$(pwd)":/app \
+  -e OPENAI_API_KEY=YOUR_OPENAI_API_KEY \
+  -e ELEVEN_API_KEY=YOUR_ELEVENLABS_API_KEY \
+  shortrocity source.txt
+```
+
+Replace `source.txt` with the path to your input text file. The generated video will be saved under `shorts/` in your mounted directory.
