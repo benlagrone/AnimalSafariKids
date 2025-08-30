@@ -19,6 +19,10 @@ load_dotenv()
    # Initialize the OpenAI client with the API key
 # client = OpenAI(api_key=openai_api_key)
 
+# Stable Diffusion API base URL (external service)
+# Example: http://192.168.86.23:8000
+IMAGE_API_BASE_URL = os.getenv("IMAGE_API_BASE_URL", "http://127.0.0.1:8000")
+
 def create_from_data(data, output_dir, caption_settings=None):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -83,6 +87,7 @@ def create_from_data(data, output_dir, caption_settings=None):
                 # Negative prompt to avoid distortions
                 # negative_prompt = f"{neg}"
 
+                # Keep the original payload structure (do not change fields)
                 request_payload = image_settings
                 request_payload['prompt'] = full_prompt
                 request_payload['negative_prompt'] = neg
@@ -111,22 +116,46 @@ def create_from_data(data, output_dir, caption_settings=None):
                 #     }
 
                 with open(os.path.join(prompt_log_dir, f"prompt_{image_counter}.json"), "w") as json_file:
-                    json.dump(request_payload, json_file, indent=2)
+                    json.dump(
+                        {
+                            "endpoint": f"{IMAGE_API_BASE_URL.rstrip('/')}/txt2img",
+                            "payload": request_payload,
+                        },
+                        json_file,
+                        indent=2,
+                    )
 
                 # Send request to Stable Diffusion API
                 response = requests.post(
-                    "http://127.0.0.1:7860/sdapi/v1/txt2img",
-                    json=request_payload
+                    f"{IMAGE_API_BASE_URL.rstrip('/')}/txt2img",
+                    json=request_payload,
+                    timeout=120,
                 )
 
                 # Check if the request was successful
                 if response.status_code == 200:
                     response_data = response.json()
-                    # Extract base64 string
-                    image_data = response_data['images'][0]
+                    image_bytes = None
 
-                    # Decode the image
-                    image_bytes = base64.b64decode(image_data)
+                    # Case 1: Automatic1111-style base64 response
+                    if isinstance(response_data, dict) and 'images' in response_data:
+                        image_data = response_data['images'][0]
+                        image_bytes = base64.b64decode(image_data)
+
+                    # Case 2: URL-based response { ok, path, url }
+                    elif isinstance(response_data, dict) and response_data.get('ok') and response_data.get('url'):
+                        file_url = response_data['url']
+                        img_resp = requests.get(file_url, timeout=120)
+                        if img_resp.status_code == 200:
+                            image_bytes = img_resp.content
+                        else:
+                            print(f"Error: Failed to download image from {file_url}.")
+
+                    if image_bytes is None:
+                        print("Error: Unexpected image API response format.")
+                        image_counter += 1
+                        continue
+
                     temp_path = os.path.join(output_dir, "temp.png")
                     with open(temp_path, "wb") as f:
                         f.write(image_bytes)

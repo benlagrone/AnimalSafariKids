@@ -22,6 +22,16 @@ Generating video...
 DONE! Here's your video: shorts/1701788183/short.avi
 ```
 
+## Image API (Stable Diffusion)
+
+Configure the external Stable Diffusion HTTP API via `IMAGE_API_BASE_URL`. Only the root and path are configurable; the request body structure remains as defined by the app. The request is sent to `/txt2img` and the client supports both base64-style responses and URL-based responses.
+
+- Set `IMAGE_API_BASE_URL` (example): `http://192.168.86.23:8000`
+- Endpoint used by the app: `${IMAGE_API_BASE_URL}/txt2img`
+- Response formats supported: A1111 base64 or `{ ok, path, url }`
+
+You can also place this in a `.env` file in the project root; it is loaded automatically.
+
 ## Caption styling
 
 Optionally, you can specify a settings file to define settings for the caption styling:
@@ -67,6 +77,7 @@ Run the tool by mounting your working directory and providing a source file:
 docker run --rm -v "$(pwd)":/app \
   -e OPENAI_API_KEY=YOUR_OPENAI_API_KEY \
   -e ELEVEN_API_KEY=YOUR_ELEVENLABS_API_KEY \
+  -e IMAGE_API_BASE_URL=http://192.168.86.23:8000 \
   shortrocity source.txt
 ```
 
