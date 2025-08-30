@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  shortrocity:
+    build:
+      context: .
+    image: shortrocity:latest
+    container_name: shortrocity
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    networks:
+      - fortress-phronesis-net
+
+networks:
+  fortress-phronesis-net:
+    external: true
+    name: fortress-phronesis-net
+

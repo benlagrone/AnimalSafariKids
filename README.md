@@ -22,6 +22,23 @@ Generating video...
 DONE! Here's your video: shorts/1701788183/short.avi
 ```
 
+## Setup
+
+- Create the external Docker network used by both services:
+  - docker network create fortress-phronesis-net
+
+- Start the image generation API (sd-api) on that network using its docker-compose.yml:
+  - docker compose up -d
+
+- Add the Image API URL root to this project’s `.env` (keeps existing keys):
+  - printf 'IMAGE_API_BASE_URL=http://sd-api:8000\n' >> .env
+
+- Build this app’s image:
+  - docker build -t shortrocity .
+
+- Run this app on the same network (loads .env from the mounted project):
+  - docker run --rm --network fortress-phronesis-net -v "$(pwd)":/app shortrocity source.txt
+
 ## Image API (Stable Diffusion)
 
 Configure the external Stable Diffusion HTTP API via `IMAGE_API_BASE_URL`. Only the root and path are configurable; the request body structure remains as defined by the app. The request is sent to `/txt2img` and the client supports both base64-style responses and URL-based responses.
