@@ -24,7 +24,17 @@ created_files = create_animal_scripts(new_animals)
 load_dotenv()
 eleven_api_key = os.getenv('ELEVEN_API_KEY')
 openai_api_key = os.getenv('OPENAI_API_KEY')
+ollama_host = os.getenv('OLLAMA_HOST')
 # client = OpenAI(api_key=openai_api_key)
+
+# Configure Ollama client (respects OLLAMA_HOST if provided)
+try:
+    if ollama_host:
+        ollama_client = ollama.Client(host=ollama_host)
+    else:
+        ollama_client = ollama.Client()
+except Exception:
+    ollama_client = None
 
 # Load art styles
 with open("instructions/art-styles.json") as f:
@@ -61,7 +71,11 @@ def generate_narration_with_ollama(source_material):
     prompt = prompt_template + f"\n\nCreate a YouTube short narration based on the following source material:\n\n{source_material}"
     
     # Generate the narration using the model
-    response = ollama.generate(model=model, prompt=prompt)
+    # Prefer configured client; fall back to module-level generate
+    if ollama_client is not None:
+        response = ollama_client.generate(model=model, prompt=prompt)
+    else:
+        response = ollama.generate(model=model, prompt=prompt)
     return response['response']  # Ollama returns a dict with 'response' key
 
 def get_random_art_style(script_art_styles, art_styles):
