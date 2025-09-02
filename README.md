@@ -1,6 +1,6 @@
-# Shortrocity
+# AnimalSafariKids
 
-Shortrocity is a tool for making AI generated short videos ("shorts" or "reels") with a ChatGPT generated script, narrated by ElevenLabs or OpenAI text-to-speech. DALL-E 3 generated background images are also added to the background. Captions with word highlighting are generated with [Captacity](https://github.com/unconv/captacity), which uses [OpenAI Whisper](https://github.com/openai/whisper).
+AnimalSafariKids is a tool for making AI generated short videos ("shorts" or "reels") with a ChatGPT generated script, narrated by ElevenLabs or OpenAI text-to-speech. DALL-E 3 generated background images are also added to the background. Captions with word highlighting are generated with [Captacity](https://github.com/unconv/captacity), which uses [OpenAI Whisper](https://github.com/openai/whisper).
 
 ## Quick Start
 use python3.11
@@ -34,10 +34,10 @@ DONE! Here's your video: shorts/1701788183/short.avi
   - printf 'IMAGE_API_BASE_URL=http://sd-api:8000\n' >> .env
 
 - Build this app’s image:
-  - docker build -t shortrocity .
+  - docker build -t animalsafarikids .
 
 - Run this app on the same network (loads .env from the mounted project):
-  - docker run --rm --network fortress-phronesis-net -v "$(pwd)":/app shortrocity source.txt
+  - docker run --rm --network fortress-phronesis-net -v "$(pwd)":/app animalsafarikids source.txt
 
 ## Image API (Stable Diffusion)
 
@@ -85,7 +85,7 @@ The settings file can look like this, for example:
 Build the Docker image:
 
 ```bash
-docker build -t shortrocity .
+docker build -t animalsafarikids .
 ```
 
 Run the tool by mounting your working directory and providing a source file:
@@ -95,7 +95,7 @@ docker run --rm -v "$(pwd)":/app \
   -e OPENAI_API_KEY=YOUR_OPENAI_API_KEY \
   -e ELEVEN_API_KEY=YOUR_ELEVENLABS_API_KEY \
   -e IMAGE_API_BASE_URL=http://192.168.86.23:8000 \
-  shortrocity source.txt
+  animalsafarikids source.txt
 ```
 
 Replace `source.txt` with the path to your input text file. The generated video will be saved under `shorts/` in your mounted directory.

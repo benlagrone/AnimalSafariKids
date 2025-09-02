@@ -1,11 +1,11 @@
 version: "3.9"
 
 services:
-  shortrocity:
+  animalsafarikids:
     build:
       context: .
-    image: shortrocity:latest
-    container_name: shortrocity
+    image: animalsafarikids:latest
+    container_name: animalsafarikids
     env_file:
       - .env
     volumes:
@@ -17,4 +17,3 @@ networks:
   fortress-phronesis-net:
     external: true
     name: fortress-phronesis-net
-
