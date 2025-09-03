@@ -40,8 +40,13 @@ except Exception:
 # Resolve project paths relative to this file
 BASE_DIR = Path(__file__).resolve().parent
 
-# Load art styles
-with open(BASE_DIR / "instructions" / "art-styles.json") as f:
+# Load art styles (robust path handling)
+art_styles_path = BASE_DIR / "instructions" / "art-styles.json"
+if not art_styles_path.exists():
+    alt_path = Path.cwd() / "instructions" / "art-styles.json"
+    if alt_path.exists():
+        art_styles_path = alt_path
+with open(art_styles_path) as f:
     art_styles = json.load(f)["art_movements"]
 
 
@@ -69,8 +74,20 @@ def generate_narration_with_ollama(source_material):
     
     # Read the prompt from the file (path relative to source tree)
     prompt_path = BASE_DIR / 'instructions' / 'prompt.txt'
-    with open(prompt_path, 'r') as file:
-        prompt_template = file.read()
+    if not prompt_path.exists():
+        alt_prompt_path = Path.cwd() / 'instructions' / 'prompt.txt'
+        if alt_prompt_path.exists():
+            prompt_path = alt_prompt_path
+
+    if prompt_path.exists():
+        with open(prompt_path, 'r') as file:
+            prompt_template = file.read()
+    else:
+        print(f"Warning: Prompt file not found at {prompt_path}. Using built-in fallback template.")
+        prompt_template = (
+            "You are a YouTube short narration generator. Generate 8–10 sections.\n"
+            "Each section has an [image description] line and a narration line."
+        )
     
     # Construct the full prompt
     prompt = prompt_template + f"\n\nCreate a YouTube short narration based on the following source material:\n\n{source_material}"
