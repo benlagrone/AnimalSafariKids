@@ -26,6 +26,7 @@ load_dotenv()
 eleven_api_key = os.getenv('ELEVEN_API_KEY')
 openai_api_key = os.getenv('OPENAI_API_KEY')
 ollama_host = os.getenv('OLLAMA_HOST')
+prompt_file_override = os.getenv('PROMPT_FILE')
 # client = OpenAI(api_key=openai_api_key)
 
 # Configure Ollama client (respects OLLAMA_HOST if provided)
@@ -41,11 +42,20 @@ except Exception:
 BASE_DIR = Path(__file__).resolve().parent
 
 # Load art styles (robust path handling)
-art_styles_path = BASE_DIR / "instructions" / "art-styles.json"
-if not art_styles_path.exists():
-    alt_path = Path.cwd() / "instructions" / "art-styles.json"
-    if alt_path.exists():
-        art_styles_path = alt_path
+art_styles_candidates = [
+    BASE_DIR / "instructions" / "art-styles.json",
+    Path.cwd() / "instructions" / "art-styles.json",
+    Path("/instructions/art-styles.json"),
+]
+for candidate in art_styles_candidates:
+    if candidate.exists():
+        art_styles_path = candidate
+        break
+else:
+    raise FileNotFoundError(
+        "instructions/art-styles.json not found. Checked: "
+        + ", ".join(str(p) for p in art_styles_candidates)
+    )
 with open(art_styles_path) as f:
     art_styles = json.load(f)["art_movements"]
 
@@ -73,21 +83,26 @@ def generate_narration_with_ollama(source_material):
     model = 'mistral'  # or whatever model you want to use
     
     # Read the prompt from the file (path relative to source tree)
-    prompt_path = BASE_DIR / 'instructions' / 'prompt.txt'
-    if not prompt_path.exists():
-        alt_prompt_path = Path.cwd() / 'instructions' / 'prompt.txt'
-        if alt_prompt_path.exists():
-            prompt_path = alt_prompt_path
-
-    if prompt_path.exists():
-        with open(prompt_path, 'r') as file:
-            prompt_template = file.read()
+    if prompt_file_override:
+        prompt_path = Path(prompt_file_override)
     else:
-        print(f"Warning: Prompt file not found at {prompt_path}. Using built-in fallback template.")
-        prompt_template = (
-            "You are a YouTube short narration generator. Generate 8–10 sections.\n"
-            "Each section has an [image description] line and a narration line."
-        )
+        prompt_candidates = [
+            BASE_DIR / 'instructions' / 'prompt.txt',
+            Path.cwd() / 'instructions' / 'prompt.txt',
+            Path('/instructions/prompt.txt'),
+        ]
+        for candidate in prompt_candidates:
+            if candidate.exists():
+                prompt_path = candidate
+                break
+        else:
+            raise FileNotFoundError(
+                "instructions/prompt.txt not found. Set PROMPT_FILE or ensure it exists. Checked: "
+                + ", ".join(str(p) for p in prompt_candidates)
+            )
+
+    with open(prompt_path, 'r') as file:
+        prompt_template = file.read()
     
     # Construct the full prompt
     prompt = prompt_template + f"\n\nCreate a YouTube short narration based on the following source material:\n\n{source_material}"
