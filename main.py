@@ -12,6 +12,7 @@ import video
 from openai import OpenAI
 import upload
 import ollama
+from pathlib import Path
 
 from animalslist import create_animal_csv
 from animalscript import get_new_animals, create_animal_scripts
@@ -36,8 +37,11 @@ try:
 except Exception:
     ollama_client = None
 
+# Resolve project paths relative to this file
+BASE_DIR = Path(__file__).resolve().parent
+
 # Load art styles
-with open("instructions/art-styles.json") as f:
+with open(BASE_DIR / "instructions" / "art-styles.json") as f:
     art_styles = json.load(f)["art_movements"]
 
 
@@ -63,8 +67,9 @@ def generate_narration_with_ollama(source_material):
     # Load your local model using Ollama
     model = 'mistral'  # or whatever model you want to use
     
-    # Read the prompt from the file
-    with open('instructions/prompt.txt', 'r') as file:
+    # Read the prompt from the file (path relative to source tree)
+    prompt_path = BASE_DIR / 'instructions' / 'prompt.txt'
+    with open(prompt_path, 'r') as file:
         prompt_template = file.read()
     
     # Construct the full prompt

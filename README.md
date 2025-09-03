@@ -35,6 +35,7 @@ DONE! Here's your video: shorts/1701788183/short.avi
 
 - Store outputs in your host Videos folder (append to `.env`):
   - printf 'HOST_VIDEOS='"$HOME"'/Videos\n' >> .env
+  - Make sure the directory exists: `mkdir -p "$HOME/Videos"`
 
 - Build this app’s image:
   - docker build -t animalsafarikids .
@@ -110,4 +111,5 @@ docker compose build
 docker compose run --rm animalsafarikids
 ```
 
-The generated shorts are written to your host directory set in `HOST_VIDEOS` (default example above: `$HOME/Videos`).
+The generated shorts are written to your host directory set in `HOST_VIDEOS`.
+If `HOST_VIDEOS` is not set, they default to a local folder `./host-videos` in this repo.

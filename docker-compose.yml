@@ -8,7 +8,9 @@ services:
       - .env
     volumes:
       - ./:/app
-      - ${HOST_VIDEOS}:/app/shorts
+      - type: bind
+        source: ${HOST_VIDEOS:-./host-videos}
+        target: /app/shorts
     networks:
       - fortress-phronesis-net
 
