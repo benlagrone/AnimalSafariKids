@@ -33,6 +33,9 @@ DONE! Here's your video: shorts/1701788183/short.avi
 - Add the Image API URL root to this project’s `.env` (keeps existing keys):
   - printf 'IMAGE_API_BASE_URL=http://sd-api:8000\n' >> .env
 
+- Store outputs in your host Videos folder (append to `.env`):
+  - printf 'HOST_VIDEOS='"$HOME"'/Videos\n' >> .env
+
 - Build this app’s image:
   - docker build -t animalsafarikids .
 
@@ -99,3 +102,12 @@ docker run --rm -v "$(pwd)":/app \
 ```
 
 Replace `source.txt` with the path to your input text file. The generated video will be saved under `shorts/` in your mounted directory.
+
+Run with Docker Compose (recommended for host Videos mapping):
+
+```bash
+docker compose build
+docker compose run --rm animalsafarikids
+```
+
+The generated shorts are written to your host directory set in `HOST_VIDEOS` (default example above: `$HOME/Videos`).
