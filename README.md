@@ -19,7 +19,7 @@ Generating script...
 Generating narration...
 Generating images...
 Generating video...
-DONE! Here's your video: shorts/1701788183/short.avi
+DONE! Your video is saved under your host Videos directory.
 ```
 
 ## Setup
@@ -30,12 +30,17 @@ DONE! Here's your video: shorts/1701788183/short.avi
 - Start the image generation API (sd-api) on that network using its docker-compose.yml:
   - docker compose up -d
 
-- Add the Image API URL root to this project’s `.env` (keeps existing keys):
-  - printf 'IMAGE_API_BASE_URL=http://sd-api:8000\n' >> .env
-
-- Store outputs in your host Videos folder (append to `.env`):
-  - printf 'HOST_VIDEOS='"$HOME"'/Videos\n' >> .env
-  - Make sure the directory exists: `mkdir -p "$HOME/Videos"`
+- Create/update `.env` with all required variables for this app (overwrites existing):
+  - cat > .env <<'ENV'
+IMAGE_API_BASE_URL=http://sd-api:8000
+IMAGE_API_KIND=form
+OLLAMA_HOST=http://ollama:11434
+HOST_VIDEOS=$HOME/Videos
+PROMPT_FILE=/app/instructions/prompt.txt
+TTS_SERVICE=gtts
+OPENAI_API_KEY=
+ELEVEN_API_KEY=
+ENV
 
 - Build this app’s image:
   - docker build -t animalsafarikids .
@@ -102,7 +107,7 @@ docker run --rm -v "$(pwd)":/app \
   animalsafarikids source.txt
 ```
 
-Replace `source.txt` with the path to your input text file. The generated video will be saved under `shorts/` in your mounted directory.
+Replace `source.txt` with the path to your input text file. The generated video will be saved under your host `Videos/` directory.
 
 Run with Docker Compose (recommended for host Videos mapping):
 

@@ -22,6 +22,8 @@ load_dotenv()
 # Stable Diffusion API base URL (external service)
 # Example: http://192.168.86.23:8000
 IMAGE_API_BASE_URL = os.getenv("IMAGE_API_BASE_URL", "http://127.0.0.1:8000")
+# API kind: 'form' (sd-api style) or 'json' (A1111 style). Default 'form'.
+IMAGE_API_KIND = os.getenv("IMAGE_API_KIND", "form").lower()
 
 def create_from_data(data, output_dir, caption_settings=None):
     if not os.path.exists(output_dir):
@@ -87,11 +89,30 @@ def create_from_data(data, output_dir, caption_settings=None):
                 # Negative prompt to avoid distortions
                 # negative_prompt = f"{neg}"
 
-                # Keep the original payload structure (do not change fields)
-                request_payload = image_settings
-                request_payload['prompt'] = full_prompt
-                request_payload['negative_prompt'] = neg
-                request_payload['seed'] = unique_seed
+                # Build payload based on configured API kind
+                if IMAGE_API_KIND == "form":
+                    # Minimal fields as used by sd-api example
+                    request_payload = {
+                        "prompt": full_prompt,
+                        "negative_prompt": neg,
+                        "width": image_settings.get("width", 512),
+                        "height": image_settings.get("height", 512),
+                        "steps": image_settings.get("steps", 28),
+                        "guidance": image_settings.get("guidance", image_settings.get("cfg_scale", 7.0)),
+                    }
+                    request_headers = {
+                        "accept": "application/json",
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    }
+                    request_kwargs = {"data": request_payload}
+                else:
+                    # JSON payload compatible with A1111
+                    request_payload = dict(image_settings)
+                    request_payload['prompt'] = full_prompt
+                    request_payload['negative_prompt'] = neg
+                    request_payload['seed'] = unique_seed
+                    request_headers = {"accept": "application/json"}
+                    request_kwargs = {"json": request_payload}
                 # API request payload
                 # request_payload = {
                 #     "prompt": full_prompt,
@@ -120,16 +141,17 @@ def create_from_data(data, output_dir, caption_settings=None):
                         {
                             "endpoint": f"{IMAGE_API_BASE_URL.rstrip('/')}/txt2img",
                             "payload": request_payload,
-                        },
-                        json_file,
-                        indent=2,
-                    )
+                            },
+                            json_file,
+                            indent=2,
+                        )
 
                 # Send request to Stable Diffusion API
                 response = requests.post(
                     f"{IMAGE_API_BASE_URL.rstrip('/')}/txt2img",
-                    json=request_payload,
+                    headers=request_headers,
                     timeout=120,
+                    **request_kwargs,
                 )
 
                 # Check if the request was successful
@@ -152,6 +174,11 @@ def create_from_data(data, output_dir, caption_settings=None):
                             print(f"Error: Failed to download image from {file_url}.")
 
                     if image_bytes is None:
+                        # Print any error message from server response
+                        if isinstance(response_data, dict):
+                            err_msg = response_data.get('error') or response_data.get('detail')
+                            if err_msg:
+                                print(f"Image API error detail: {err_msg}")
                         print("Error: Unexpected image API response format.")
                         image_counter += 1
                         continue
@@ -183,7 +210,15 @@ def create_from_data(data, output_dir, caption_settings=None):
                         with open(os.path.join(output_dir, f"image_{image_counter}.png"), "wb") as f:
                             f.write(image_bytes)
                 else:
-                    print(f"Error: Failed to generate image. Status code: {response.status_code}")
+                    # Log more detail to help diagnose 4xx/5xx
+                    try:
+                        err_text = response.text[:500]
+                    except Exception:
+                        err_text = "<no response body>"
+                    print(
+                        f"Error: Failed to generate image. Status code: {response.status_code}. "
+                        f"Endpoint: {IMAGE_API_BASE_URL.rstrip('/')}/txt2img. Response: {err_text}"
+                    )
 
                 image_counter += 1
 

@@ -10,7 +10,7 @@
         "youtube_category": 15
     },
     "captions": {
-        "font": "/System/Library/Fonts/Supplemental/Chalkboard.ttc",
+        "font": "branding/Chalkboard.ttc",
         "font_size": 60,
         "font_color": "white",
         "stroke_width": 3,
@@ -43,7 +43,7 @@
         "fps": 30,
         "width": 720,
         "height": 1280,
-        "codec": "avc1",
+        "codec": "mp4v",
         "slide_speed_multiplier": 4
     },
     "image": {

@@ -64,6 +64,15 @@ def create(narrations, output_dir, output_filename, settings):
     fourcc = cv2.VideoWriter_fourcc(*codec)
     temp_video = os.path.join(output_dir, "temp_video.mp4")
     out = cv2.VideoWriter(temp_video, fourcc, frame_rate, (width, height))
+    # Fallback if the requested codec isn't available (e.g., avc1/H.264)
+    if not out.isOpened():
+        fallback_codec = 'mp4v'
+        fourcc = cv2.VideoWriter_fourcc(*fallback_codec)
+        out = cv2.VideoWriter(temp_video, fourcc, frame_rate, (width, height))
+        if out.isOpened():
+            print(f"Warning: Requested codec '{codec}' unavailable. Using fallback '{fallback_codec}'.")
+        else:
+            raise RuntimeError("Failed to initialize VideoWriter with both primary and fallback codecs.")
 
     def add_logo_to_frame(frame):
         if logo is None:
@@ -91,16 +100,30 @@ def create(narrations, output_dir, output_filename, settings):
             
         return result
 
+    # Ensure at least one generated image exists before proceeding
+    first_image_path = os.path.join(output_dir, "images", "image_1.png")
+    if not os.path.exists(first_image_path):
+        raise RuntimeError(
+            f"No generated images found at {os.path.dirname(first_image_path)}. "
+            "Image generation likely failed earlier. Check the logs above."
+        )
+
     for i, narration_item in enumerate(narration_data):
         current_image_path = os.path.join(output_dir, "images", f"image_{i+1}.png")
         current_image = cv2.imread(current_image_path)
+        if current_image is None:
+            raise RuntimeError(f"Failed to load image: {current_image_path}")
         current_image = cv2.resize(current_image, (width, height))
 
         # Load the next image if it exists
         if i + 1 < len(narration_data):
             next_image_path = os.path.join(output_dir, "images", f"image_{i+2}.png")
             next_image = cv2.imread(next_image_path)
-            next_image = cv2.resize(next_image, (width, height))
+            if next_image is None:
+                # If the next image is missing, just use a black frame as fallback for transition
+                next_image = np.zeros((height, width, 3), dtype=np.uint8)
+            else:
+                next_image = cv2.resize(next_image, (width, height))
         else:
             next_image = np.zeros((height, width, 3), dtype=np.uint8)
 
@@ -270,4 +293,3 @@ def reprocess_video(input_video, output_dir, output_file):
         print("FFmpeg stderr:", result.stderr)
     else:
         print("Video reprocessed successfully.")
-

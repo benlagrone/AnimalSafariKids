@@ -27,6 +27,8 @@ eleven_api_key = os.getenv('ELEVEN_API_KEY')
 openai_api_key = os.getenv('OPENAI_API_KEY')
 ollama_host = os.getenv('OLLAMA_HOST')
 prompt_file_override = os.getenv('PROMPT_FILE')
+# All media outputs write to the bind-mounted host videos directory
+OUTPUT_ROOT = '/videos'
 # client = OpenAI(api_key=openai_api_key)
 
 # Configure Ollama client (respects OLLAMA_HOST if provided)
@@ -181,7 +183,7 @@ for script_name in script_names:
 
     # Create a unique directory for each script's output
     short_id = str(int(time.time()))
-    basedir = os.path.join("shorts", short_id)
+    basedir = os.path.join(OUTPUT_ROOT, short_id)
     if not os.path.exists(basedir):
         os.makedirs(basedir)
 

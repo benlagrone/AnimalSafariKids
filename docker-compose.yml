@@ -10,7 +10,7 @@ services:
       - ./:/app
       - type: bind
         source: ${HOST_VIDEOS:-./host-videos}
-        target: /app/shorts
+        target: /videos
     networks:
       - fortress-phronesis-net
 
