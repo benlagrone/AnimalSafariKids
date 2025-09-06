@@ -22,6 +22,11 @@ load_dotenv()
 # Stable Diffusion API base URL (external service)
 # Example: http://192.168.86.23:8000
 IMAGE_API_BASE_URL = os.getenv("IMAGE_API_BASE_URL", "http://127.0.0.1:8000")
+# Read timeout in seconds for image API (connect/read tuple uses 10s connect default)
+try:
+    IMAGE_API_TIMEOUT = float(os.getenv("IMAGE_API_TIMEOUT", "300"))
+except ValueError:
+    IMAGE_API_TIMEOUT = 300.0
 # API kind: 'form' (sd-api style) or 'json' (A1111 style). Default 'form'.
 IMAGE_API_KIND = os.getenv("IMAGE_API_KIND", "form").lower()
 
@@ -108,9 +113,9 @@ def create_from_data(data, output_dir, caption_settings=None):
                 else:
                     # JSON payload compatible with A1111
                     request_payload = dict(image_settings)
+                    # Do not alter the structure or existing values except prompt/negative_prompt
                     request_payload['prompt'] = full_prompt
                     request_payload['negative_prompt'] = neg
-                    request_payload['seed'] = unique_seed
                     request_headers = {"accept": "application/json"}
                     request_kwargs = {"json": request_payload}
                 # API request payload
@@ -147,12 +152,20 @@ def create_from_data(data, output_dir, caption_settings=None):
                         )
 
                 # Send request to Stable Diffusion API
-                response = requests.post(
-                    f"{IMAGE_API_BASE_URL.rstrip('/')}/txt2img",
-                    headers=request_headers,
-                    timeout=120,
-                    **request_kwargs,
-                )
+                try:
+                    response = requests.post(
+                        f"{IMAGE_API_BASE_URL.rstrip('/')}/txt2img",
+                        headers=request_headers,
+                        timeout=(10, IMAGE_API_TIMEOUT),
+                        **request_kwargs,
+                    )
+                except requests.exceptions.ReadTimeout:
+                    print(
+                        f"Error: Image API timed out after {IMAGE_API_TIMEOUT}s: "
+                        f"{IMAGE_API_BASE_URL.rstrip('/')}/txt2img"
+                    )
+                    image_counter += 1
+                    continue
 
                 # Check if the request was successful
                 if response.status_code == 200:

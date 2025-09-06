@@ -40,6 +40,7 @@ PROMPT_FILE=/app/instructions/prompt.txt
 TTS_SERVICE=gtts
 OPENAI_API_KEY=
 ELEVEN_API_KEY=
+IMAGE_API_TIMEOUT=300
 ENV
 
 - Build this app’s image:
