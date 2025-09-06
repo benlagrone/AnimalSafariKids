@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsm6 \
     libxext6 \
     libxrender1 \
+    imagemagick \
     fonts-dejavu-core \
     && rm -rf /var/lib/apt/lists/*
 

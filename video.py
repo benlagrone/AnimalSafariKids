@@ -7,6 +7,7 @@ import subprocess
 import captacity
 import json
 import math
+import shutil
 
 def get_audio_duration(audio_file):
     return len(AudioSegment.from_file(audio_file))
@@ -171,6 +172,14 @@ def create(narrations, output_dir, output_filename, settings):
     segments = create_segments(narrations, output_dir)
 
     caption_settings = settings.get("captions", {})
+    # Ensure ImageMagick is configured for MoviePy (used by Captacity)
+    im_binary = shutil.which("magick") or shutil.which("convert")
+    if im_binary:
+        os.environ.setdefault("IMAGEMAGICK_BINARY", im_binary)
+    else:
+        raise RuntimeError(
+            "ImageMagick not found in PATH. Please ensure 'imagemagick' is installed in the container."
+        )
     # Normalize caption font path to an absolute path under the project root if needed
     font_path = caption_settings.get("font")
     if isinstance(font_path, str) and font_path.strip():
