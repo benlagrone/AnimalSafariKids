@@ -176,9 +176,9 @@ def create(narrations, output_dir, output_filename, settings):
     if isinstance(font_path, str) and font_path.strip():
         base_dir = os.path.dirname(os.path.abspath(__file__))  # typically /app
         if not os.path.isabs(font_path):
-            candidate = os.path.join(base_dir, font_path)
-            if os.path.exists(candidate):
-                caption_settings = {**caption_settings, "font": candidate}
+            candidate = os.path.abspath(os.path.join(base_dir, font_path))
+            # Always pass an absolute path so Captacity does not look under its assets dir
+            caption_settings = {**caption_settings, "font": candidate}
     captacity.add_captions(
         video_file=input_path,
         output_file=output_path,
