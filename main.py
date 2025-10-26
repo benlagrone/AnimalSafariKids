@@ -17,28 +17,29 @@ from pathlib import Path
 from animalslist import create_animal_csv
 from animalscript import get_new_animals, create_animal_scripts
 
-# Get new animals and create scripts
-new_animals = get_new_animals()
-created_files = create_animal_scripts(new_animals)
-
-# Load environment variables from .env file
-load_dotenv()
-eleven_api_key = os.getenv('ELEVEN_API_KEY')
-openai_api_key = os.getenv('OPENAI_API_KEY')
-ollama_host = os.getenv('OLLAMA_HOST')
-prompt_file_override = os.getenv('PROMPT_FILE')
 # All media outputs write to the bind-mounted host videos directory
-OUTPUT_ROOT = '/videos'
-# client = OpenAI(api_key=openai_api_key)
+OUTPUT_ROOT = "/videos"
 
-# Configure Ollama client (respects OLLAMA_HOST if provided)
-try:
-    if ollama_host:
-        ollama_client = ollama.Client(host=ollama_host)
-    else:
-        ollama_client = ollama.Client()
-except Exception:
-    ollama_client = None
+# Globals configured during startup
+ollama_client = None
+prompt_file_override = None
+
+
+def initialize_environment():
+    """Load environment variables and configure shared clients."""
+    global ollama_client, prompt_file_override
+
+    load_dotenv()
+    prompt_file_override = os.getenv("PROMPT_FILE")
+    ollama_host = os.getenv("OLLAMA_HOST")
+
+    try:
+        if ollama_host:
+            ollama_client = ollama.Client(host=ollama_host)
+        else:
+            ollama_client = ollama.Client()
+    except Exception:
+        ollama_client = None
 
 # Resolve project paths relative to this file
 BASE_DIR = Path(__file__).resolve().parent
@@ -136,103 +137,105 @@ def get_random_art_style(script_art_styles, art_styles):
     print(f"Warning: Art style '{selected_style_name}' not found in art-styles.json")
     return None
 
-update_settings_json(created_files)
+def main():
+    initialize_environment()
 
-# Determine the settings file
-settings_file = "settings.json"
-if len(sys.argv) > 1:
-    # If the first argument is not a script, assume it's the settings file
-    if sys.argv[1].endswith('.json'):
-        settings_file = sys.argv[1]
+    # Expand the script list with a fresh animal before any other work
+    try:
+        new_animals = get_new_animals()
+    except RuntimeError as exc:
+        print(f"Could not fetch a unique animal: {exc}")
+        return
+    created_files = create_animal_scripts(new_animals)
+    update_settings_json(created_files)
+
+    settings_file = "settings.json"
+    single_script = None
+    if len(sys.argv) > 1:
+        arg = sys.argv[1]
+        if arg.endswith(".json"):
+            settings_file = arg
+        else:
+            single_script = arg.replace(".txt", "")
+
+    with open(settings_file) as f:
+        settings = json.load(f)
+
+    if single_script is not None:
+        script_names = [single_script]
     else:
-        # Otherwise, treat it as a script name
-        script_names = [sys.argv[1].replace('.txt', '')]
+        script_names = settings["script"].get("scripts", [])
 
-# Load settings from the determined settings file
-with open(settings_file) as f:
-    settings = json.load(f)
+    scripts_dir = "scripts"
+    if not os.path.exists(scripts_dir):
+        os.makedirs(scripts_dir)
 
-# Extract the list of script names from settings if not overridden by command-line
-if 'script_names' not in locals():
-    script_names = settings["script"].get("scripts", [])
+    for script_name in script_names:
+        if not script_name.endswith(".txt"):
+            script_name += ".txt"
+        script_path = os.path.join(scripts_dir, script_name)
 
-scripts_dir = "scripts"
+        if not os.path.exists(script_path):
+            print(f"Error: Script file not found: {script_path}")
+            continue
 
-# Ensure the scripts directory exists
-if not os.path.exists(scripts_dir):
-    os.makedirs(scripts_dir)
+        with open(script_path) as f:
+            source_material = f.read()
 
-# Process each script in the list
-for script_name in script_names:
-    # Ensure the script name has the correct extension
-    if not script_name.endswith('.txt'):
-        script_name += '.txt'
-    script_path = os.path.join(scripts_dir, script_name)
+        caption_settings = settings.get("captions", {})
 
-    # Check if the script file exists
-    if not os.path.exists(script_path):
-        print(f"Error: Script file not found: {script_path}")
-        continue
+        short_id = str(int(time.time()))
+        basedir = os.path.join(OUTPUT_ROOT, short_id)
+        if not os.path.exists(basedir):
+            os.makedirs(basedir)
 
-    # Load the script content
-    with open(script_path) as f:
-        source_material = f.read()
+        print(f"Generating script for {script_name}...")
 
-    # Load caption settings if available
-    caption_settings = settings.get("captions", {})
+        response_text = generate_narration_with_ollama(source_material)
+        response_text = (
+            response_text.replace("`", "'")
+            .replace("…", "...")
+            .replace("“", '"')
+            .replace("”", '"')
+        )
 
-    # Create a unique directory for each script's output
-    short_id = str(int(time.time()))
-    basedir = os.path.join(OUTPUT_ROOT, short_id)
-    if not os.path.exists(basedir):
-        os.makedirs(basedir)
+        with open(os.path.join(basedir, "response.txt"), "w") as f:
+            f.write(response_text)
 
-    print(f"Generating script for {script_name}...")
+        data, narrations = narration.parse(response_text)
+
+        for item in data["scenes"]:
+            art_style = get_random_art_style(settings["script"]["art"], art_styles)
+            item["art_style"] = art_style
+
+        with open(os.path.join(basedir, "data.json"), "w") as f:
+            json.dump(data, f, ensure_ascii=False)
+
+        print("Generating narration...")
+        narration.create(data, os.path.join(basedir, "narrations"))
+
+        print("Generating images...")
+        images.create_from_data(data, os.path.join(basedir, "images"), settings)
+
+        print("Generating video...")
+        output_file = f"{script_name}.mp4"
+        video.create(narrations, basedir, output_file, settings)
+
+        print(f"DONE! Here's your video: {os.path.join(basedir, output_file)}")
+
+        if settings.get("upload", {}).get("enabled", False):
+            print("Uploading video to YouTube...")
+            try:
+                video_id = upload.upload_video(basedir, settings)
+                print(f"Video uploaded successfully! ID: {video_id}")
+            except Exception as e:
+                print(f"Error uploading video: {str(e)}")
+
+        print("Process complete!")
+
+    print("All scripts processed.")
+    create_animal_csv()
 
 
-    # response_text = response.choices[0].message.content
-    response_text = generate_narration_with_ollama(source_material)
-
-    response_text = response_text.replace("'", "'").replace("`", "'").replace("…", "...").replace(""", '"').replace(""", '"')
-
-    with open(os.path.join(basedir, "response.txt"), "w") as f:
-        f.write(response_text)
-
-    data, narrations = narration.parse(response_text)
-
-    # Add art style to each image description
-    for item in data["scenes"]:
-        # if "image" in item:
-        art_style = get_random_art_style(settings["script"]["art"], art_styles)
-        item["art_style"] = art_style
-
-    with open(os.path.join(basedir, "data.json"), "w") as f:
-        json.dump(data, f, ensure_ascii=False)
-
-    print(f"Generating narration...")
-    narration.create(data, os.path.join(basedir, "narrations"))
-
-    print("Generating images...")
-    images.create_from_data(data, os.path.join(basedir, "images"), settings)
-
-    print("Generating video...")
-    output_file = f"{script_name}.mp4"
-    video.create(narrations, basedir, output_file, settings)
-
-    print(f"DONE! Here's your video: {os.path.join(basedir, output_file)}")
-
-        # Upload the video if enabled in settings
-    if settings.get("upload", {}).get("enabled", False):
-        print("Uploading video to YouTube...")
-        try:
-            video_id = upload.upload_video(basedir, settings)
-            print(f"Video uploaded successfully! ID: {video_id}")
-        except Exception as e:
-            print(f"Error uploading video: {str(e)}")
-    
-    print("Process complete!")
-
-print("All scripts processed.")
-
-# Call the function when needed
-animal_names = create_animal_csv()
+if __name__ == "__main__":
+    main()

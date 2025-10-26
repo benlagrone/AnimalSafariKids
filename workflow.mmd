@@ -1,0 +1,42 @@
+flowchart TD
+    CLI["Operator CLI ./main.py"] --> MAIN["main.py orchestrator"]
+
+    MAIN --> Animals["animalscript.py get_new_animals + create_animal_scripts"]
+    Animals --> OllamaAnimals[(HTTP POST OLLAMA_HOST/api/generate; example 127.0.0.1:11434/api/generate)]
+    Animals --> UpdateSettings["Write new script list to settings.json"]
+
+    MAIN --> Loop{{For each script name}}
+    Loop --> ScriptFile["Load scripts/<name>.txt"]
+    ScriptFile --> PromptLoad["Read prompt template from instructions/prompt.txt or $PROMPT_FILE"]
+    PromptLoad --> NarrationPrompt["generate_narration_with_ollama"]
+    NarrationPrompt --> OllamaNarr[(Ollama mistral API same endpoint)]
+    NarrationPrompt --> ResponseText["Save response.txt"]
+
+    ResponseText --> Parse["narration.parse -> scenes + narrations"]
+    Parse --> DataJSON["Write /videos/<timestamp>/data.json"]
+    Parse --> NarrRequest["narration.create"]
+    Parse --> ImagesModule["images.create_from_data"]
+
+    NarrRequest --> gTTS["gTTS HTTPS translate.google.com/translate_tts"]
+    NarrRequest --> ElevenLabs["ElevenLabs HTTPS api.elevenlabs.io/v1/text-to-speech/VOICE-ID when TTS_SERVICE=elevenlabs"]
+    gTTS --> NarrationsMP3["/videos/<timestamp>/narrations/*.mp3"]
+    ElevenLabs --> NarrationsMP3
+
+    ImagesModule --> StableDiff[(HTTP POST IMAGE_API_BASE_URL/txt2img; default 127.0.0.1:8000/txt2img)]
+    StableDiff --> ImageFiles["/videos/<timestamp>/images/image_n.png"]
+
+    NarrationsMP3 --> VideoCreate["video.py create"]
+    ImageFiles --> VideoCreate
+    VideoCreate --> LocalTools["Captacity + OpenCV + FFmpeg + ImageMagick"]
+    VideoCreate --> FinalVideo["/videos/<timestamp>/<script>.mp4"]
+
+    FinalVideo --> HostMount["$HOST_VIDEOS bind mount"]
+
+    VideoCreate --> UploadCheck{{Upload enabled in settings.json?}}
+    UploadCheck -->|No| Finish["Done for script"]
+    UploadCheck -->|Yes| UploadModule["upload.py upload_video"]
+    UploadModule --> GoogleOAuth[(OAuth accounts.google.com and token oauth2.googleapis.com)]
+    UploadModule --> YouTube[(YouTube resumable upload www.googleapis.com/upload/youtube/v3/videos)]
+    YouTube --> Finish
+
+    Finish --> Loop

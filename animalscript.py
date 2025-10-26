@@ -22,30 +22,32 @@ def get_new_animals():
             existing_animals = {standardize_name(row[0]) for row in reader}
 
     prompt = f"""Given this list of animals that are already used: {sorted(existing_animals)}
-Please provide exactly 5 new, unique animal names that are NOT in this list.
-The animals should be interesting and educational for children.
+Please provide exactly 1 new, unique animal name that is NOT in this list.
+The animal should be interesting and educational for children.
 Do NOT include animals closely related to or variations of animals already listed.
-Return ONLY the 5 animal names, one per line, no numbers, no prefixes, no parentheses."""
+Return ONLY the animal name on a single line, no numbers, no prefixes, no parentheses."""
 
-    response = ollama.generate(model='mistral', prompt=prompt)
-    raw_animals = response['response'].strip().split('\n')
+    max_attempts = 5
+    attempts = 0
 
-    # Preserve your original detailed cleaning functionality here:
-    new_animals = [animal.strip().lower() for animal in raw_animals if animal.strip()]
-    new_animals = [animal.split('. ')[-1] if '. ' in animal else animal for animal in new_animals]  # Remove "1. " type prefixes
-    new_animals = [animal.split('.')[-1] if '.' in animal else animal for animal in new_animals]  # Remove any remaining dots
-    new_animals = [animal.strip() for animal in new_animals]
+    while attempts < max_attempts:
+        attempts += 1
+        response = ollama.generate(model='mistral', prompt=prompt)
+        raw_animals = response['response'].strip().split('\n')
 
-    # Now standardize and check against existing animals
-    final_animals = []
-    for animal in new_animals:
-        clean_animal = standardize_name(animal)
-        if clean_animal and clean_animal not in existing_animals and clean_animal not in final_animals:
-            final_animals.append(animal)  # Keep original cleaned animal name (with possible descriptions)
-        if len(final_animals) == 5:
-            break
+        new_animals = [animal.strip().lower() for animal in raw_animals if animal.strip()]
+        new_animals = [animal.split('. ')[-1] if '. ' in animal else animal for animal in new_animals]  # Remove "1. " type prefixes
+        new_animals = [animal.split('.')[-1] if '.' in animal else animal for animal in new_animals]  # Remove any remaining dots
+        new_animals = [animal.strip() for animal in new_animals]
 
-    return final_animals
+        for animal in new_animals:
+            clean_animal = standardize_name(animal)
+            if clean_animal and clean_animal not in existing_animals:
+                return [animal]
+
+        print("Received duplicate from Ollama, retrying...")
+
+    raise RuntimeError("Failed to obtain a unique animal after multiple attempts.")
 
 def create_animal_scripts(animals):
     # Ensure scripts directory exists
