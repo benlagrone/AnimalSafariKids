@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import csv
 import json
 import os
 import sys
@@ -14,11 +15,11 @@ import upload
 import ollama
 from pathlib import Path
 
-from animalslist import create_animal_csv
 from animalscript import get_new_animals, create_animal_scripts
 
 # All media outputs write to the bind-mounted host videos directory
 OUTPUT_ROOT = "/videos"
+ANIMAL_CSV_PATH = Path("animal_names.csv")
 
 # Globals configured during startup
 ollama_client = None
@@ -77,8 +78,38 @@ def update_settings_json(created_files):
     # Write the updated settings back to the file
     with open('settings.json', 'w') as f:
         json.dump(settings, f, indent=4)
-    
+
     print(f"Updated settings.json with new animals: {', '.join(animal_names)}")
+
+
+def record_completed_animal(script_name: str) -> None:
+    """Append the processed animal to animal_names.csv if not already present."""
+    animal_name = (
+        script_name.replace(".txt", "")
+        .replace("-", " ")
+        .replace("_", " ")
+        .strip()
+    )
+
+    existing = set()
+    if ANIMAL_CSV_PATH.exists():
+        with ANIMAL_CSV_PATH.open("r", newline="") as csv_file:
+            reader = csv.reader(csv_file)
+            next(reader, None)  # skip header if present
+            for row in reader:
+                if row:
+                    existing.add(row[0].strip().lower())
+    else:
+        with ANIMAL_CSV_PATH.open("w", newline="") as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow(["Animal Name"])
+
+    if animal_name.lower() in existing:
+        return
+
+    with ANIMAL_CSV_PATH.open("a", newline="") as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow([animal_name])
 
 
 def generate_narration_with_ollama(source_material):
@@ -223,6 +254,8 @@ def main():
 
         print(f"DONE! Here's your video: {os.path.join(basedir, output_file)}")
 
+        record_completed_animal(script_name)
+
         if settings.get("upload", {}).get("enabled", False):
             print("Uploading video to YouTube...")
             try:
@@ -234,7 +267,6 @@ def main():
         print("Process complete!")
 
     print("All scripts processed.")
-    create_animal_csv()
 
 
 if __name__ == "__main__":
