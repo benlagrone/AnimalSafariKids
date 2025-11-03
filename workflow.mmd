@@ -3,11 +3,10 @@ flowchart TD
 
     MAIN --> Animals["animalscript.py get_new_animals + create_animal_scripts"]
     Animals --> OllamaAnimals[(HTTP POST OLLAMA_HOST/api/generate; example 127.0.0.1:11434/api/generate)]
-    Animals --> UpdateSettings["Write new script list to settings.json"]
 
     MAIN --> Loop{{For each script name}}
     Loop --> ScriptFile["Load scripts/<name>.txt"]
-    ScriptFile --> PromptLoad["Read prompt template from instructions/prompt.txt or $PROMPT_FILE"]
+    ScriptFile --> PromptLoad["Read prompt template from instructions/prompt.txt"]
     PromptLoad --> NarrationPrompt["generate_narration_with_ollama"]
     NarrationPrompt --> OllamaNarr[(Ollama mistral API same endpoint)]
     NarrationPrompt --> ResponseText["Save response.txt"]

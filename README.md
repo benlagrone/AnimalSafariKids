@@ -11,16 +11,27 @@ $ export OPENAI_API_KEY=YOUR_OPENAI_API_KEY
 $ export ELEVEN_API_KEY=YOUR_ELEVENLABS_API_KEY
 ```
 
-Then, put your source content in a file, for example `source.txt` and run the `main.py`:
+Then run `main.py`:
 
 ```console
-$ ./main.py source.txt
+$ ./main.py
 Generating script...
 Generating narration...
 Generating images...
 Generating video...
 DONE! Your video is saved under your host Videos directory.
 ```
+
+Each execution picks a new animal, writes the prompt template to `scripts/<animal>.txt`, and renders a complete short from scratch. To rerun an existing script manually, pass its base name (for example `./main.py koala`).
+
+## Automated Scheduling
+
+- To schedule three runs per day (midnight, 8 AM, 4 PM by default) run:  
+  `bash scripts/install_cron.sh`
+- The script updates your user crontab, writes logs under `logs/shortrocity.log`, and prevents overlapping runs with `flock`.
+- Adjust timings by setting `SHORTROCITY_SCHEDULE="0 0 * * *,0 12 * * *,0 18 * * *"` (comma-separated cron expressions) before invoking the installer.
+- Skip the lock if `flock` is unavailable by setting `SHORTROCITY_SKIP_LOCK=1`.
+- Trigger a run manually anytime with `docker compose run --rm animalsafarikids` (or `./main.py` outside of Docker).
 
 ## Setup
 
@@ -36,7 +47,6 @@ IMAGE_API_BASE_URL=http://sd-api:8000
 IMAGE_API_KIND=form
 OLLAMA_HOST=http://ollama:11434
 HOST_VIDEOS=$HOME/Videos
-PROMPT_FILE=/app/instructions/prompt.txt
 TTS_SERVICE=gtts
 OPENAI_API_KEY=
 ELEVEN_API_KEY=
@@ -59,12 +69,14 @@ Configure the external Stable Diffusion HTTP API via `IMAGE_API_BASE_URL`. Only 
 
 You can also place this in a `.env` file in the project root; it is loaded automatically.
 
+To adjust the narration template, edit `instructions/prompt.txt` before running the app.
+
 ## Caption styling
 
 Optionally, you can specify a settings file to define settings for the caption styling:
 
 ```console
-$ ./main.py source.txt settings.json
+$ ./main.py custom-settings.json
 ```
 
 The settings file can look like this, for example:
@@ -98,17 +110,17 @@ Build the Docker image:
 docker build -t animalsafarikids .
 ```
 
-Run the tool by mounting your working directory and providing a source file:
+Run the tool by mounting your working directory:
 
 ```bash
 docker run --rm -v "$(pwd)":/app \
   -e OPENAI_API_KEY=YOUR_OPENAI_API_KEY \
   -e ELEVEN_API_KEY=YOUR_ELEVENLABS_API_KEY \
   -e IMAGE_API_BASE_URL=http://192.168.86.23:8000 \
-  animalsafarikids source.txt
+  animalsafarikids
 ```
 
-Replace `source.txt` with the path to your input text file. The generated video will be saved under your host `Videos/` directory.
+The generated video will be saved under your host `Videos/` directory. Pass a script base name as the final argument if you want to reuse an existing entry (for example `docker run ... animalsafarikids koala`).
 
 Run with Docker Compose (recommended for host Videos mapping):
 

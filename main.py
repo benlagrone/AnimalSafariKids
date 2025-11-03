@@ -23,15 +23,13 @@ ANIMAL_CSV_PATH = Path("animal_names.csv")
 
 # Globals configured during startup
 ollama_client = None
-prompt_file_override = None
 
 
 def initialize_environment():
     """Load environment variables and configure shared clients."""
-    global ollama_client, prompt_file_override
+    global ollama_client
 
     load_dotenv()
-    prompt_file_override = os.getenv("PROMPT_FILE")
     ollama_host = os.getenv("OLLAMA_HOST")
 
     try:
@@ -45,7 +43,6 @@ def initialize_environment():
 # Resolve project paths relative to this file
 BASE_DIR = Path(__file__).resolve().parent
 
-# Load art styles (robust path handling)
 art_styles_candidates = [
     BASE_DIR / "instructions" / "art-styles.json",
     Path.cwd() / "instructions" / "art-styles.json",
@@ -62,24 +59,6 @@ else:
     )
 with open(art_styles_path) as f:
     art_styles = json.load(f)["art_movements"]
-
-
-def update_settings_json(created_files):
-    # Read the current settings
-    with open('settings.json', 'r') as f:
-        settings = json.load(f)
-    
-    # Remove .txt extension from filenames
-    animal_names = [file.replace('.txt', '') for file in created_files]
-    
-    # Update the scripts list in settings
-    settings['script']['scripts'] = animal_names
-    
-    # Write the updated settings back to the file
-    with open('settings.json', 'w') as f:
-        json.dump(settings, f, indent=4)
-
-    print(f"Updated settings.json with new animals: {', '.join(animal_names)}")
 
 
 def record_completed_animal(script_name: str) -> None:
@@ -117,23 +96,20 @@ def generate_narration_with_ollama(source_material):
     model = 'mistral'  # or whatever model you want to use
     
     # Read the prompt from the file (path relative to source tree)
-    if prompt_file_override:
-        prompt_path = Path(prompt_file_override)
+    prompt_candidates = [
+        BASE_DIR / 'instructions' / 'prompt.txt',
+        Path.cwd() / 'instructions' / 'prompt.txt',
+        Path('/instructions/prompt.txt'),
+    ]
+    for candidate in prompt_candidates:
+        if candidate.exists():
+            prompt_path = candidate
+            break
     else:
-        prompt_candidates = [
-            BASE_DIR / 'instructions' / 'prompt.txt',
-            Path.cwd() / 'instructions' / 'prompt.txt',
-            Path('/instructions/prompt.txt'),
-        ]
-        for candidate in prompt_candidates:
-            if candidate.exists():
-                prompt_path = candidate
-                break
-        else:
-            raise FileNotFoundError(
-                "instructions/prompt.txt not found. Set PROMPT_FILE or ensure it exists. Checked: "
-                + ", ".join(str(p) for p in prompt_candidates)
-            )
+        raise FileNotFoundError(
+            "instructions/prompt.txt not found. Ensure it exists. Checked: "
+            + ", ".join(str(p) for p in prompt_candidates)
+        )
 
     with open(prompt_path, 'r') as file:
         prompt_template = file.read()
@@ -178,7 +154,6 @@ def main():
         print(f"Could not fetch a unique animal: {exc}")
         return
     created_files = create_animal_scripts(new_animals)
-    update_settings_json(created_files)
 
     settings_file = "settings.json"
     single_script = None
@@ -194,6 +169,8 @@ def main():
 
     if single_script is not None:
         script_names = [single_script]
+    elif created_files:
+        script_names = [Path(name).stem for name in created_files]
     else:
         script_names = settings["script"].get("scripts", [])
 
